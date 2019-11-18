@@ -1,0 +1,21 @@
+<project name ="BaseDonne">
+
+  <target name="build">
+    <mkdir dir="compile"/>
+    <javac srcdir="code" destdir="compile" encoding="utf8" classpath="./sqlite-jdbc-3.27.2.1.jar">
+    </javac>
+  </target>
+
+
+<!--permet de supprimer les fichiers .class et la javadoc-->
+  <target name="clean">
+    <delete dir ="compile"/>
+  </target>
+
+
+<!--permet de lancer le jeu en interface graphique-->
+  <target name="run">
+    <java classname="umons.BaseDonne" classpath="compile:sqlite-jdbc-3.27.2.1.jar"/>
+  </target>
+
+</project>
