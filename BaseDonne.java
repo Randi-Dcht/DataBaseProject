@@ -15,8 +15,8 @@ public class BaseDonne
   {
     BaseDonne bd = new BaseDonne("jdbc:sqlite:");
     bd.connection("TestRandy.db");
-    //bd.creerBaseDonnee();
-    //bd.creerTable("CREATE TABLE etudiant(Matricule integer PRIMARY KEY, Nom text, Faculte text)");
+    bd.creerBaseDonnee();
+    bd.creerTable("CREATE TABLE etudiant(Matricule integer PRIMARY KEY, Nom text, Faculte text)");
     bd.insererTable("INSERT INTO etudiant(Matricule,Nom,Faculte) VALUES(1234,'rnd','sciences')");
     bd.terminer();
   }
