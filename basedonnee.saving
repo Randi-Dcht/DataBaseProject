@@ -18,3 +18,13 @@ ________________________________________________________________________________
 2019/11/18 20:38:20 : Linux :  : Insertion dans la table est correctement placée :-)
 2019/11/18 20:38:20 : Linux :  : La base de donnée est bien fermée ;-) 
 ___________________________________________________
+Utilisation de la base de donnée
+@auteur: Randy Dauchot & Guillaume Cardoen
+#projet Bachelier Base de donnée 2019
+_____________________________________________________________________________________
+2019/11/18 20:44:03 : Linux : Connection est bien réussite avec la Data Base
+2019/11/18 20:44:03 : Linux : La création s'est bien passée : SQLite JDBC
+2019/11/18 20:44:03 : Linux : Oups une erreur lors de la création table
+2019/11/18 20:44:03 : Linux : Erreur lors de l'insertion dans la table : org.sqlite.SQLiteException: [SQLITE_CONSTRAINT]  Abort due to constraint violation (UNIQUE constraint failed: etudiant.Matricule)
+2019/11/18 20:44:03 : Linux : La base de donnée est bien fermée ;-) 
+___________________________________________________

@@ -1,13 +1,13 @@
-package be.ac.umons.SGBD;
+package umons;
 import java.sql.*;
 
-public class Dependance
+public class Depedance
 {
   public static void main(String[] args)
   {
 
   }
-
+/*
   public void funcDept(String table,String lhs, String rhs)
   {
     String[] lhs2 = lhs.split(" ");
@@ -27,5 +27,5 @@ public class Dependance
 
   public String[] removeDependency()
   {
-  }
+  }*/
 }
