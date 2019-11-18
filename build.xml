@@ -2,7 +2,7 @@
 
   <target name="build">
     <mkdir dir="compile"/>
-    <javac srcdir="code" destdir="compile" encoding="utf8" classpath="./sqlite-jdbc-3.27.2.1.jar">
+    <javac srcdir="code" destdir="compile" encoding="utf8" classpath="lib/sqlite-jdbc-3.27.2.1.jar">
     </javac>
   </target>
 
@@ -15,7 +15,7 @@
 
 <!--permet de lancer le jeu en interface graphique-->
   <target name="run">
-    <java classname="umons.BaseDonne" classpath="compile:sqlite-jdbc-3.27.2.1.jar"/>
+    <java classname="umons.BaseDonne" classpath="compile:lib/sqlite-jdbc-3.27.2.1.jar"/>
   </target>
 
 </project>

@@ -12,29 +12,17 @@ public class Saving
   {
     try
     {
-      ecrire = new PrintWriter(new BufferedWriter(new FileWriter("./"+ fichier +".saving",true)));
+      ecrire = new PrintWriter(new BufferedWriter(new FileWriter("./misc/"+ fichier +".saving",true)));
       ecrire.println("Utilisation de la base de donnée");
       ecrire.println("@auteur: Randy Dauchot & Guillaume Cardoen");
       ecrire.println("#projet Bachelier Base de donnée 2019");
       ecrire.println("_____________________________________________________________________________________");
     }
     catch(Exception e)
-    {}
+    {
+      System.out.println(e);
+    }
   }
-
-  /*public static void OPEN(String fichier)
-  {
-    try
-    {
-      ecrire = new PrintWriter(new BufferedWriter(new FileWriter("./misc/FichierResumer/"+ fichier +".saving")));
-    }
-    catch(IOException e)
-    {
-      ERROR(e,"open");
-    }
-    ecrire.println("Une nouvelle partie démarre ...");
-  }*/
-
 
   public static void WRITE(String phrase)
   {
