@@ -6,46 +6,46 @@ package be.ac.umons.projetBDD;
 
 import java.sql.*;
 
-public class BaseDonne
+public class Database
 {
 
     final String url;
     private Connection connection;
 
-    public BaseDonne(String url)
+    public Database(String url)
     {
         this.url = url;
     }
 
-    public boolean connection(String fichier)
+    public boolean connect(String fichier)
     {
         try
         {
             Class.forName("org.sqlite.JDBC"); /*<= permet de dire le fichier jar*/
             connection = DriverManager.getConnection(url + fichier);
-            /*Supprimer =>*/ Saving.WRITE("Connection est bien réussite avec la Data Base");
+            /*Supprimer =>*/ Saving.WRITE("Successfully connected with the database");
             return true;
         }
         catch(Exception e)
         {
-            /*Supprimer =>*/ Saving.WRITE("Erreur : " + e);
+            /*Supprimer =>*/ Saving.WRITE("Error : " + e);
             return false;
         }
     }
 
-    public boolean creerBaseDonnee()
+    public boolean createDatabase()
     {
         if(connection == null)
             return false;
         try
         {
             DatabaseMetaData dmd = connection.getMetaData();
-            /*Supprimer =>*/ Saving.WRITE("La création s'est bien passée : " + dmd.getDriverName());
+            /*Supprimer =>*/ Saving.WRITE("Successfully created : " + dmd.getDriverName());
             return true;
         }
         catch(Exception e)
         {
-            /*Supprimer =>*/ Saving.WRITE("Erreur lors de la création de la base de donnée !!");
+            /*Supprimer =>*/ Saving.WRITE("Error while creating the database !!");
             return false;
         }
     }
@@ -66,14 +66,14 @@ public class BaseDonne
 //        }
 //    }
 
-    public boolean creerTable(String nomTable, String contenuTable) {
+    public boolean createTable(String tableName, String tableContent) {
         try {
             Statement stat = connection.createStatement();
-            stat.execute(String.format("CREATE TABLE %s(%s)", nomTable, contenuTable));
+            stat.execute(String.format("CREATE TABLE %s(%s)", tableName, tableContent));
             return true;
         } catch(Exception e)
         {
-            /*Supprimer =>*/ Saving.WRITE("Oups une erreur lors de la création table");
+            /*Supprimer =>*/ Saving.WRITE("An error has been raised when creating the table.");
             return false;
         }
     }
@@ -94,24 +94,24 @@ public class BaseDonne
 //        }
 //    }
 
-    public boolean insererTable(String nomTable, String valeurs)
+    public boolean insertIntoTable(String tableName, String values)
     {
         try
         {
-            String comm = String.format("INSERT INTO %s VALUES(%s)", nomTable, valeurs);
+            String comm = String.format("INSERT INTO %s VALUES(%s)", tableName, values);
             PreparedStatement precmd = connection.prepareStatement(comm);
             precmd.executeUpdate();
-            /*Supprimer =>*/Saving.WRITE("Insertion dans la table est correctement placée :-)");
+            /*Supprimer =>*/Saving.WRITE(String.format("Successfully inserted (%s) into %s", values, tableName));
             return true;
         }
         catch(Exception e)
         {
-            /*Supprimer =>*/Saving.WRITE("Erreur lors de l'insertion dans la table : " + e);
+            /*Supprimer =>*/Saving.WRITE(String.format("Error while inserting into %s : %s", tableName, e.getMessage()));
             return false;
         }
     }
 
-    public boolean terminer()
+    public boolean close()
     {
         try
         {

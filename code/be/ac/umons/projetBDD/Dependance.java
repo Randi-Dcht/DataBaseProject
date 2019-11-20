@@ -1,7 +1,7 @@
 package be.ac.umons.projetBDD;
 import java.sql.*;
 
-public class Depedance
+public class Dependance
 {
     public static void main(String[] args)
     {
