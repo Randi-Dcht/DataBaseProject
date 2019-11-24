@@ -1,21 +1,37 @@
 <project name ="ProjetBDD">
 
+<!--Permet d'éxécuter le code uniquement sans les test-->
   <target name="build">
     <mkdir dir="compile"/>
-    <javac srcdir="code" destdir="compile" encoding="utf8" classpath=".:lib/sqlite-jdbc-3.27.2.1.jar">
+    <javac srcdir="code/src" destdir="compile" encoding="utf8" classpath=".:compile:lib/sqlite-jdbc-3.27.2.1.jar">
     </javac>
   </target>
 
 
-<!--permet de supprimer les fichiers .class et la javadoc-->
+<!--permet de supprimer les fichiers .class de java-->
   <target name="clean">
     <delete dir ="compile"/>
   </target>
 
-
+<!--Permet de compiler les test Junit5-->
+<target name="compilerTest" depends="build">
+    <javac srcdir="code/test" destdir="compile">
+      <classpath>
+        <path id="org.junit" location="lib/junit-jupiter-5.5.2/junit.jar" />
+      </classpath>
+    </javac>
+</target>
 <!--permet de lancer le projet-->
   <target name="run" depends="build">
 	  <java classname="be.ac.umons.projetBDD.Main" classpath=".:compile:lib/sqlite-jdbc-3.27.2.1.jar"/>
   </target>
+
+<!--Permet de lancer les test Junit 5-->
+  <target name="test" depends="compilerTest" >
+    <java classname="org.junit.runner.JUnitCore" classpath="compile:lib/junit-jupiter-5.5.2.jar:lib/hamcrest-core-1.3.jar">
+       <arg value="TestProjet"/>
+    </java>
+  </target>
+
 
 </project>
