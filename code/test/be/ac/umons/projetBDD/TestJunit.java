@@ -13,6 +13,9 @@ class TestJunit
   @Test
   public void testBDD()
   {
-    assertFalse(1==0);
+    DataBase dt = new Database("");
+    assertFalse(dt.connect(Test.db));
+    dt.connect("TestRandy.db");
+    assertTrue(dt.createDataBase());
   }
 }
