@@ -26,7 +26,16 @@ public class Main {
         Database db = new Database("jdbc:sqlite:");
         if (! db.connect(askDatabasePath())) {
             System.err.println("An error was raised while trying to open the database !");
+            return;
         }
+
+        if (! db.doesTableExists("FuncDep")) {
+            if (db.createTable("FuncDep", "table_name text, lhs text, rhs text"))
+                System.out.println("The table FuncDep was automatically created !");
+            else
+                System.err.println("The table FuncDep wasn't found and an error was raised while trying to create it.");
+        }
+
         Scanner input = new Scanner(System.in);
         while (true) {
             System.out.println("Command : ");

@@ -29,6 +29,7 @@ public class Database
         catch(Exception e)
         {
             /*Supprimer =>*/ Saving.WRITE("Error : " + e);
+            System.err.println("Error : " + e);
             return false;
         }
     }
@@ -57,7 +58,7 @@ public class Database
             return true;
         } catch(Exception e)
         {
-            /*Supprimer =>*/ Saving.WRITE("An error has been raised when creating the table.");
+            /*Supprimer =>*/ Saving.WRITE(String.format("An error has been raised when creating the table %s.", tableName));
             return false;
         }
     }
@@ -71,6 +72,22 @@ public class Database
             precmd.executeUpdate();
             /*Supprimer =>*/Saving.WRITE(String.format("Successfully inserted (%s) into %s", values, tableName));
             return true;
+        }
+        catch(Exception e)
+        {
+            /*Supprimer =>*/Saving.WRITE(String.format("Error while inserting into %s : %s", tableName, e.getMessage()));
+            return false;
+        }
+    }
+
+    public boolean doesTableExists(String tableName) {
+        try
+        {
+            String comm = String.format("SELECT name FROM sqlite_master WHERE type='table' AND name='%s';", tableName);
+            PreparedStatement precmd = connection.prepareStatement(comm);
+            ResultSet rs = precmd.executeQuery();
+            rs.next();
+            return rs.getRow() == 1;
         }
         catch(Exception e)
         {
