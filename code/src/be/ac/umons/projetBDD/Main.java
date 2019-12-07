@@ -1,5 +1,7 @@
 package be.ac.umons.projetBDD;
 
+import be.ac.umons.projetBDD.Commands.Confirmable;
+
 import java.io.File;
 import java.util.*;
 
@@ -7,6 +9,7 @@ public class Main {
 
     private static CommandParser cp;
     private static Database db;
+    public static Confirmable commandToConfirm;
 
     public static void main(String[] args)
     {
