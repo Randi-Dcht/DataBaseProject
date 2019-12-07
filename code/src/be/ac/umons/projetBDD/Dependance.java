@@ -3,11 +3,29 @@ import java.sql.*;
 
 public class Dependance
 {
-    public static void main(String[] args)
-    {
+    private String lhs;
+    private String   rhs;
+    private String tableName;
 
+    public Dependance(String tableName, String lhs, String rhs) { // TODO : Check for multi-lhs;
+        this.tableName = tableName;
+        this.lhs = lhs;
+        this.rhs = rhs;
     }
-/*
+
+    public String getTableName() {
+        return tableName;
+    }
+
+    public String getLhs() {
+        return lhs;
+    }
+
+    public String getRhs() {
+        return rhs;
+    }
+
+    /*
   public void funcDept(String table,String lhs, String rhs)
   {
     String[] lhs2 = lhs.split(" ");

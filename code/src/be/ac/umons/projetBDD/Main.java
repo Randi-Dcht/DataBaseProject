@@ -1,9 +1,12 @@
 package be.ac.umons.projetBDD;
 
 import java.io.File;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
+
+    private static CommandParser cp;
+    private static Database db;
 
     public static void main(String[] args)
     {
@@ -23,18 +26,34 @@ public class Main {
         System.out.println("#Base de données I : Project (Bloc 2 Computer Sciences at UMons)");
         System.out.println("_____________________________________________________________________________________");
 
-        Database db = new Database("jdbc:sqlite:");
+        db = new Database("jdbc:sqlite:");
         if (! db.connect(askDatabasePath())) {
             System.err.println("An error was raised while trying to open the database !");
+            return;
         }
+
+        checkFuncDep();
+
+        cp = new CommandParser(db);
+
         Scanner input = new Scanner(System.in);
         while (true) {
             System.out.println("Command : ");
             String comm = input.nextLine().toLowerCase();
             if (comm.equals("exit"))
                 break;
+            cp.executeCommand(comm);
         }
         db.close();
+    }
+
+    public static void checkFuncDep() {
+        if (! db.doesTableExists("FuncDep")) {
+            if (db.createTable("FuncDep", "table_name text, lhs text, rhs text"))
+                System.out.println("The table FuncDep was automatically created !");
+            else
+                System.err.println("The table FuncDep wasn't found and an error was raised while trying to create it.");
+        }
     }
 
     public static String askDatabasePath() {
