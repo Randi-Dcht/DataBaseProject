@@ -39,8 +39,8 @@ public class Main {
         Scanner input = new Scanner(System.in);
         while (true) {
             System.out.println("Command : ");
-            String comm = input.nextLine().toLowerCase();
-            if (comm.equals("exit"))
+            String comm = input.nextLine();
+            if (comm.toLowerCase().equals("exit"))
                 break;
             cp.executeCommand(comm);
         }

@@ -82,6 +82,7 @@ public class Database
         }
         catch(Exception e)
         {
+            System.err.println(String.format("Error while inserting into %s : %s", tableName, e.getMessage()));
             /*Supprimer =>*/Saving.WRITE(String.format("Error while inserting into %s : %s", tableName, e.getMessage()));
             return false;
         }
@@ -91,8 +92,7 @@ public class Database
         try
         {
             String comm = String.format("SELECT name FROM sqlite_master WHERE type='table' AND name='%s';", tableName);
-            PreparedStatement precmd = connection.prepareStatement(comm);
-            ResultSet rs = precmd.executeQuery();
+            ResultSet rs = executeQuery(comm);
             rs.next();
             return rs.getRow() == 1;
         }
@@ -122,13 +122,25 @@ public class Database
         try {
             while (deps.next()) {
                 Dependance dep = new Dependance(deps.getString(1), deps.getString(2), deps.getString(3));
-                if (! dependenciesMap.containsKey(dep.getTableName()))
-                    dependenciesMap.put(dep.getTableName(), new ArrayList<>());
-                dependenciesMap.get(dep.getTableName()).add(dep);
+                addIntoDependenciesMap(dep);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void addIntoDependenciesMap(Dependance dep) {
+        if (! dependenciesMap.containsKey(dep.getTableName()))
+            dependenciesMap.put(dep.getTableName(), new ArrayList<>());
+        dependenciesMap.get(dep.getTableName()).add(dep);
+    }
+
+    public boolean addDependence(Dependance dep) {
+        if (insertIntoTable("FuncDep", String.format("\"%s\", \"%s\", \"%s\"", dep.getTableName(), dep.getLhs(), dep.getRhs()))) {
+            addIntoDependenciesMap(dep);
+            return true;
+        }
+        return false;
     }
 
     public boolean close()
