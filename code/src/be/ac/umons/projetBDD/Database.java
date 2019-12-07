@@ -5,16 +5,22 @@ package be.ac.umons.projetBDD;
 /*=>!utilise le jar : sqlite-jdbc-3.27.2.1.jar!<=*/
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Database
 {
 
     final String url;
     private Connection connection;
+    private Map<String, List<Dependance>> dependenciesMap;
 
     public Database(String url)
     {
         this.url = url;
+        dependenciesMap = new HashMap<>();
     }
 
     public boolean connect(String fichier)
@@ -24,6 +30,7 @@ public class Database
             Class.forName("org.sqlite.JDBC"); /*<= permet de dire le fichier jar*/
             connection = DriverManager.getConnection(url + fichier);
             /*Supprimer =>*/ Saving.WRITE("Successfully connected with the database");
+            refreshDependenciesMap();
             return true;
         }
         catch(Exception e)
@@ -110,6 +117,20 @@ public class Database
 
     }
 
+    public void refreshDependenciesMap() {
+        ResultSet deps = executeQuery("SELECT * FROM FuncDep;");
+        try {
+            while (deps.next()) {
+                Dependance dep = new Dependance(deps.getString(1), deps.getString(2), deps.getString(3));
+                if (! dependenciesMap.containsKey(dep.getTableName()))
+                    dependenciesMap.put(dep.getTableName(), new ArrayList<>());
+                dependenciesMap.get(dep.getTableName()).add(dep);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public boolean close()
     {
         try
@@ -125,5 +146,9 @@ public class Database
             /*Supprimer =>*/ Saving.WRITE("Erreur lors de la fermeture de la base de donnée");
             return false;
         }
+    }
+
+    public Map<String, List<Dependance>> getDependenciesMap() {
+        return dependenciesMap;
     }
 }
