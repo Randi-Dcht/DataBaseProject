@@ -96,6 +96,20 @@ public class Database
         }
     }
 
+    public ResultSet executeQuery(String query) {
+        try
+        {
+            PreparedStatement precmd = connection.prepareStatement(query);
+            return precmd.executeQuery();
+        }
+        catch(Exception e)
+        {
+            /*Supprimer =>*/Saving.WRITE(String.format("Error while querying : %s", e.getMessage()));
+            return null;
+        }
+
+    }
+
     public boolean close()
     {
         try
