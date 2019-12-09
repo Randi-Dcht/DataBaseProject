@@ -6,9 +6,9 @@ import be.ac.umons.projetBDD.Commands.ListDF;
 
 public class CommandParser {
 
-    private Database db;
+    private Sql db;
 
-    public CommandParser(Database db) {
+    public CommandParser(Sql db) {
         this.db = db;
     }
 

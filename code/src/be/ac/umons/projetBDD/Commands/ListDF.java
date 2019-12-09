@@ -1,11 +1,11 @@
 package be.ac.umons.projetBDD.Commands;
 
-import be.ac.umons.projetBDD.Database;
+import be.ac.umons.projetBDD.Sql;
 import be.ac.umons.projetBDD.Dependance;
 
 public class ListDF extends Command {
 
-    public ListDF(Database db, String[] args) {
+    public ListDF(Sql db, String[] args) {
         super(db, args);
         possibleNumberOfArgs.add(0);
         possibleNumberOfArgs.add(1);

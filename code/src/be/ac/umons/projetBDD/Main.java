@@ -8,7 +8,7 @@ import java.util.*;
 public class Main {
 
     private static CommandParser cp;
-    private static Database db;
+    private static Sql db;
     public static Confirmable commandToConfirm;
 
     public static void main(String[] args)
@@ -29,7 +29,7 @@ public class Main {
         System.out.println("#Base de données I : Project (Bloc 2 Computer Sciences at UMons)");
         System.out.println("_____________________________________________________________________________________");
 
-        db = new Database("jdbc:sqlite:");
+        db = new Sql("jdbc:sqlite:");
         if (! db.connect(askDatabasePath())) {
             System.err.println("An error was raised while trying to open the database !");
             return;

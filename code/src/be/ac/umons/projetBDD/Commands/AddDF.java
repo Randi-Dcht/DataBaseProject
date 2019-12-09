@@ -1,6 +1,6 @@
 package be.ac.umons.projetBDD.Commands;
 
-import be.ac.umons.projetBDD.Database;
+import be.ac.umons.projetBDD.Sql;
 import be.ac.umons.projetBDD.Dependance;
 import be.ac.umons.projetBDD.Main;
 
@@ -8,7 +8,7 @@ public class AddDF extends Command implements Confirmable {
 
     boolean confirmed;
 
-    public AddDF(Database db, String[] args) {
+    public AddDF(Sql db, String[] args) {
         super(db, args);
         possibleNumberOfArgs.add(3);
     }

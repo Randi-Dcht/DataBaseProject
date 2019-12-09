@@ -1,16 +1,16 @@
 package be.ac.umons.projetBDD.Commands;
 
-import be.ac.umons.projetBDD.Database;
+import be.ac.umons.projetBDD.Sql;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Command {
-    protected Database db;
+    protected Sql db;
     protected String[] args;
     protected List<Integer> possibleNumberOfArgs;
 
-    public Command(Database db, String[] args) {
+    public Command(Sql db, String[] args) {
         this.db = db;
         this.args = args;
         possibleNumberOfArgs = new ArrayList<>();
