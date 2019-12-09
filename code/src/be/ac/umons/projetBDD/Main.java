@@ -1,5 +1,7 @@
 package be.ac.umons.projetBDD;
 
+import be.ac.umons.projetBDD.Commands.Confirmable;
+
 import java.io.File;
 import java.util.*;
 
@@ -7,6 +9,7 @@ public class Main {
 
     private static CommandParser cp;
     private static Database db;
+    public static Confirmable commandToConfirm;
 
     public static void main(String[] args)
     {
@@ -39,8 +42,8 @@ public class Main {
         Scanner input = new Scanner(System.in);
         while (true) {
             System.out.println("Command : ");
-            String comm = input.nextLine().toLowerCase();
-            if (comm.equals("exit"))
+            String comm = input.nextLine();
+            if (comm.toLowerCase().equals("exit"))
                 break;
             cp.executeCommand(comm);
         }
