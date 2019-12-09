@@ -14,16 +14,6 @@ public class Main {
     public static void main(String[] args)
     {
         Saving.REOPEN("basedonnee");
-//        BaseDonne bd = new BaseDonne("jdbc:sqlite:");
-//        bd.connect("./misc/TestGui.db");
-//        bd.createDataBase();
-////        bd.creerTable("CREATE TABLE etudiant(Matricule integer PRIMARY KEY, Nom text, Faculte text)");
-//        bd.createTable("etudiant", "Matricule integer PRIMARY KEY, Nom text, Faculte text");
-////        bd.insererTable("INSERT INTO etudiant(Matricule,Nom,Faculte) VALUES(1234,'rnd','sciences')");
-//        bd.insertIntoTable("etudiant", "1234,'rnd','sciences'");
-//        bd.close();
-//        Saving.CLOSE();
-
         System.out.println("Database usage");
         System.out.println("@author: Randy Dauchot & Guillaume Cardoen");
         System.out.println("#Base de données I : Project (Bloc 2 Computer Sciences at UMons)");
