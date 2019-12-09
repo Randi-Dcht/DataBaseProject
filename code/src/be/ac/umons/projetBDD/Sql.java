@@ -10,14 +10,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Database
+public class Sql
 {
-
     final String url;
     private Connection connection;
     private Map<String, List<Dependance>> dependenciesMap;
 
-    public Database(String url)
+    public Sql(String url)
     {
         this.url = url;
         dependenciesMap = new HashMap<>();
