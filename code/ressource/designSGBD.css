@@ -1,0 +1,43 @@
+.history
+{
+    -fx-background-color: #848484;
+    -fx-font-size: 17;
+}
+
+.transpRed
+{
+    -fx-background-color: transparent;
+}
+
+.transpGreen
+{
+    -fx-background-color: transparent;
+}
+
+.transpRed:hover
+{
+    -fx-background-color: transparent;
+    -fx-background-radius: 50px;
+    -fx-effect: dropshadow(gaussian,#F6CECE,15,0,0,4);
+}
+
+.transpGreen:hover
+{
+    -fx-background-color: transparent;
+    -fx-background-radius: 50px;
+    -fx-effect: dropshadow(gaussian,#D8F781,15,0,0,4);
+}
+
+.background
+{
+    -fx-background-color: #151515;
+    -fx-fill: #F2F2F2;
+}
+
+.textMd
+{
+    -fx-fill: #F2F2F2;
+    -fx-font-size:22;
+    -fx-min-width: 600px;
+    -fx-background-color: transparent;
+}

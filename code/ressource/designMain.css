@@ -1,0 +1,31 @@
+.button
+{
+    -fx-background-color: #2E2E2E;
+    -fx-alignment: CENTER;
+    -fx-font-size: 19;
+    -fx-border-radius: 40;
+}
+
+.button .text
+{
+    -fx-fill: #FFFFFF;
+}
+.button:hover
+{
+    -fx-background-color: #6E6E6E;
+    -fx-effect: dropshadow(gaussian,#F8E0E0,15,0,0,4);
+}
+.button:pressed
+{
+    -fx-background-color: #F8E0E0;
+}
+.fondEcran
+{
+    -fx-background-color: #151515;
+}
+.text
+{
+    -fx-background-color: #FFFFFF;
+    -fx-alignment: CENTER;
+    -fx-font-size: 19;
+}
