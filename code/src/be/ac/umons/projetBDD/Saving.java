@@ -13,10 +13,7 @@ public class Saving
         try
         {
             ecrire = new PrintWriter(new BufferedWriter(new FileWriter("./misc/"+ fichier +".saving",true)));
-            ecrire.println("Utilisation de la base de donnée");
-            ecrire.println("@auteur: Randy Dauchot & Guillaume Cardoen");
-            ecrire.println("#projet Bachelier Base de donnée 2019");
-            ecrire.println("_____________________________________________________________________________________");
+            ecrire.println("Open the new session -- @auteur: Randy Dauchot & Guillaume Cardoen -- #projet Bachelier Base de donnée 2019");
         }
         catch(Exception e)
         {
@@ -26,7 +23,7 @@ public class Saving
 
     public static void WRITE(String phrase)
     {
-        DateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        DateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm");
         Date date = new Date();
         ecrire.print(format.format(date) + " : " + System.getProperty("os.name") + " : ");
         ecrire.println(phrase);
@@ -35,6 +32,7 @@ public class Saving
 
     public static void CLOSE()
     {
+        ecrire.println("Close the session of dataBase");
         ecrire.println("___________________________________________________");
         ecrire.close();
     }
