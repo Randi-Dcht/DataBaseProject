@@ -1,5 +1,6 @@
 package be.ac.umons.projetBDD.Commands;
 
+import be.ac.umons.projetBDD.DataBase;
 import be.ac.umons.projetBDD.Sql;
 import be.ac.umons.projetBDD.Dependance;
 import be.ac.umons.projetBDD.Main;
@@ -29,7 +30,7 @@ public class AddDF extends Command implements Confirmable {
             Main.commandToConfirm = this;
             return;
         }
-        Dependance dep = new Dependance(tableName, lhs, rhs);
+        Dependance dep = new Dependance(new DataBase(tableName), lhs, rhs);
         if (db.addDependence(dep))
             System.out.println("DF has been added !");
     }

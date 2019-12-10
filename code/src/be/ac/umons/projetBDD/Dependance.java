@@ -5,16 +5,16 @@ public class Dependance
 {
     private String lhs;
     private String   rhs;
-    private String tableName;
+    private DataBase tableName;
 
-    public Dependance(String tableName, String lhs, String rhs) { // TODO : Check for multi-lhs;
+    public Dependance(DataBase tableName, String lhs, String rhs) { // TODO : Check for multi-lhs;
         this.tableName = tableName;
         this.lhs = lhs;
         this.rhs = rhs;
     }
 
     public String getTableName() {
-        return tableName;
+        return tableName.toString();
     }
 
     public String getLhs() {
@@ -24,26 +24,4 @@ public class Dependance
     public String getRhs() {
         return rhs;
     }
-
-    /*
-  public void funcDept(String table,String lhs, String rhs)
-  {
-    String[] lhs2 = lhs.split(" ");
-  }
-
-  public boolean BCNF(String Table)
-  {
-  }
-
-  public boolean 3NF(String Table)
-  {
-  }
-
-  public void addDependency()
-  {
-  }
-
-  public String[] removeDependency()
-  {
-  }*/
 }
