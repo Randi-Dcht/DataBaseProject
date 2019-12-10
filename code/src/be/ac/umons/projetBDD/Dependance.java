@@ -1,5 +1,7 @@
 package be.ac.umons.projetBDD;
 
+import be.ac.umons.projetBDD.GUI.DataBase;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;

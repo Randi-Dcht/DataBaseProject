@@ -1,4 +1,6 @@
-package be.ac.umons.projetBDD;
+package be.ac.umons.projetBDD.GUI;
+
+import be.ac.umons.projetBDD.Dependance;
 
 import java.io.Serializable;
 import java.util.ArrayList;

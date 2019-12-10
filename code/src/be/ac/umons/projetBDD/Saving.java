@@ -1,5 +1,7 @@
 package be.ac.umons.projetBDD;
 
+import be.ac.umons.projetBDD.GUI.DataBase;
+
 import java.io.*;
 import java.util.*;
 import java.text.*;
@@ -37,7 +39,7 @@ public class Saving
         ecrire.close();
     }
 
-    public static void saveData(String file,DataBase db)
+    public static void saveData(String file, DataBase db)
     {
         try
         {
