@@ -19,6 +19,21 @@ public class DataBase implements Serializable
         return nameSql;
     }
 
+    public ArrayList<Dependance> getDependance()
+    {
+        return df;
+    }
+
+    public void add(Dependance dd)
+    {
+        df.add(dd);
+    }
+
+    public void remove(Dependance dd)
+    {
+        df.remove(dd);
+    }
+
         /*
   public void funcDept(String table,String lhs, String rhs)
   {

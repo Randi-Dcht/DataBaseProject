@@ -33,7 +33,7 @@ public class Sql
         }
         catch(Exception e)
         {
-            /*Supprimer =>*/ Saving.WRITE("Error : " + e);
+            Saving.WRITE("Error : " + e);
             System.err.println("Error : " + e);
             return false;
         }
@@ -46,12 +46,12 @@ public class Sql
         try
         {
             DatabaseMetaData dmd = connection.getMetaData();
-            /*Supprimer =>*/ Saving.WRITE("Successfully created : " + dmd.getDriverName());
+            Saving.WRITE("Successfully created : " + dmd.getDriverName());
             return true;
         }
         catch(Exception e)
         {
-            /*Supprimer =>*/ Saving.WRITE("Error while creating the database !!");
+            Saving.WRITE("Error while creating the database !!");
             return false;
         }
     }
@@ -63,7 +63,7 @@ public class Sql
             return true;
         } catch(Exception e)
         {
-            /*Supprimer =>*/ Saving.WRITE(String.format("An error has been raised when creating the table %s.", tableName));
+            Saving.WRITE(String.format("An error has been raised when creating the table %s.", tableName));
             return false;
         }
     }
@@ -75,13 +75,13 @@ public class Sql
             String comm = String.format("INSERT INTO %s VALUES(%s)", tableName, values);
             PreparedStatement precmd = connection.prepareStatement(comm);
             precmd.executeUpdate();
-            /*Supprimer =>*/Saving.WRITE(String.format("Successfully inserted (%s) into %s", values, tableName));
+            Saving.WRITE(String.format("Successfully inserted (%s) into %s", values, tableName));
             return true;
         }
         catch(Exception e)
         {
             System.err.println(String.format("Error while inserting into %s : %s", tableName, e.getMessage()));
-            /*Supprimer =>*/Saving.WRITE(String.format("Error while inserting into %s : %s", tableName, e.getMessage()));
+            Saving.WRITE(String.format("Error while inserting into %s : %s", tableName, e.getMessage()));
             return false;
         }
     }
@@ -96,7 +96,7 @@ public class Sql
         }
         catch(Exception e)
         {
-            /*Supprimer =>*/Saving.WRITE(String.format("Error while inserting into %s : %s", tableName, e.getMessage()));
+            Saving.WRITE(String.format("Error while inserting into %s : %s", tableName, e.getMessage()));
             return false;
         }
     }
@@ -109,7 +109,7 @@ public class Sql
         }
         catch(Exception e)
         {
-            /*Supprimer =>*/Saving.WRITE(String.format("Error while querying : %s", e.getMessage()));
+            Saving.WRITE(String.format("Error while querying : %s", e.getMessage()));
             return null;
         }
 
@@ -154,12 +154,12 @@ public class Sql
             if(connection == null)
                 return false;
             connection.close();
-            /*Supprimer =>*/Saving.WRITE("La base de donnée est bien fermée ;-) ");
+            Saving.WRITE("La base de donnée est bien fermée ;-) ");
             return true;
         }
         catch(Exception e)
         {
-            /*Supprimer =>*/ Saving.WRITE("Erreur lors de la fermeture de la base de donnée");
+            Saving.WRITE("Erreur lors de la fermeture de la base de donnée");
             return false;
         }
     }
