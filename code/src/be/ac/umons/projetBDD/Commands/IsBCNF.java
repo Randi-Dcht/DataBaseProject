@@ -24,6 +24,8 @@ public class IsBCNF extends Command {
             return;
         }
         for (Dependance df : depList) {
+            if (isTrivial(df))
+                continue;
             List<String> lhs = new ArrayList<>(df.getLhs());
             Set<String> determinedOne = new HashSet<>(lhs); // no duplicates
             List<Dependance> tempList = new LinkedList<>(depList); // copy the list
@@ -31,8 +33,6 @@ public class IsBCNF extends Command {
             while (changed && tempList.size() != 0) {
                 changed = false;
                 for (Iterator<Dependance> it = tempList.listIterator(); it.hasNext();) {
-//                    if (df == df2)
-//                        continue;
                     Dependance df2 = it.next();
                     if (lhs.containsAll(df2.getLhs())) {
                         determinedOne.add(df2.getRhs());
@@ -49,6 +49,10 @@ public class IsBCNF extends Command {
         }
         System.out.println(String.format("The table (%s) is in BCNF !", args[1]));
 
+    }
+
+    private boolean isTrivial(Dependance df) {
+        return df.getLhs().contains(df.getRhs());
     }
 
 
