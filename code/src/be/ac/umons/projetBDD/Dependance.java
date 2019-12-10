@@ -1,15 +1,19 @@
 package be.ac.umons.projetBDD;
-import java.sql.*;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Dependance
 {
-    private String lhs;
-    private String   rhs;
+    private List<String> lhs;
+    private String rhs;
     private DataBase tableName;
 
     public Dependance(DataBase tableName, String lhs, String rhs) { // TODO : Check for multi-lhs;
         this.tableName = tableName;
-        this.lhs = lhs;
+        this.lhs = new ArrayList<>();
+        this.lhs.addAll(Arrays.asList(lhs.split(",")));
         this.rhs = rhs;
     }
 
@@ -17,7 +21,7 @@ public class Dependance
         return tableName.toString();
     }
 
-    public String getLhs() {
+    public List<String> getLhs() {
         return lhs;
     }
 

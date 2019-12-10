@@ -29,7 +29,6 @@ public class Sql
             Class.forName("org.sqlite.JDBC"); /*<= permet de dire le fichier jar*/
             connection = DriverManager.getConnection(url + fichier);
             /*Supprimer =>*/ Saving.WRITE("Successfully connected with the database");
-            refreshDependenciesMap();
             return true;
         }
         catch(Exception e)
@@ -87,7 +86,7 @@ public class Sql
         }
     }
 
-    public boolean doesTableExists(String tableName) {
+    public boolean tableExists(String tableName) {
         try
         {
             String comm = String.format("SELECT name FROM sqlite_master WHERE type='table' AND name='%s';", tableName);
@@ -135,7 +134,13 @@ public class Sql
     }
 
     public boolean addDependence(Dependance dep) {
-        if (insertIntoTable("FuncDep", String.format("\"%s\", \"%s\", \"%s\"", dep.getTableName(), dep.getLhs(), dep.getRhs()))) {
+        String lhs = "";
+        for (int i = 0; i < dep.getLhs().size(); i++) {
+            lhs += dep.getLhs().get(i);
+            if (i != dep.getLhs().size() - 1)
+                lhs += ",";
+        }
+        if (insertIntoTable("FuncDep", String.format("\"%s\", \"%s\", \"%s\"", dep.getTableName(), lhs, dep.getRhs()))) {
             addIntoDependenciesMap(dep);
             return true;
         }
@@ -161,5 +166,20 @@ public class Sql
 
     public Map<String, List<Dependance>> getDependenciesMap() {
         return dependenciesMap;
+    }
+
+    public List<String> getTableContentName(String tableName) {
+        String comm = String.format("PRAGMA table_info('%s')", tableName);
+        ResultSet rs = executeQuery(comm);
+        List<String> names = new ArrayList<>();
+        try {
+            while (rs.next()) {
+                names.add(rs.getString("name"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return names;
     }
 }
