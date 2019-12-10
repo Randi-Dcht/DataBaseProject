@@ -10,7 +10,7 @@ public class DataBase implements Serializable
 
     public DataBase(String name)
     {
-        nameSql = name + ".db";
+        nameSql = name;
         df = new ArrayList<Dependance>();
     }
 

@@ -25,7 +25,7 @@ public class AddDF extends Command implements Confirmable {
     }
 
     private void addDF(String tableName, String lhs, String rhs) {
-        if (! db.doesTableExists(tableName) && ! confirmed) {
+        if (! db.tableExists(tableName) && ! confirmed) {
             System.out.println(String.format("Warning : the table %s doesn't exist ! Execute \"ExecAnyway\" if you still want to add the dependency.", tableName));
             Main.commandToConfirm = this;
             return;

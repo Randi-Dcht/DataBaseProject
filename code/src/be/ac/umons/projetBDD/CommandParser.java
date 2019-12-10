@@ -2,6 +2,7 @@ package be.ac.umons.projetBDD;
 
 import be.ac.umons.projetBDD.Commands.AddDF;
 import be.ac.umons.projetBDD.Commands.Command;
+import be.ac.umons.projetBDD.Commands.IsBCNF;
 import be.ac.umons.projetBDD.Commands.ListDF;
 
 public class CommandParser {
@@ -26,6 +27,9 @@ public class CommandParser {
                 if (commTab.length > 1)
                     System.out.println("Warning : The command ExecAnyway takes no arguments : the arguments has been ignored !");
                 execAnyway();
+                break;
+            case "isbcnf":
+                command = new IsBCNF(db, commTab);
                 break;
             default:
                 System.err.println(String.format("Command \"%s\" isn't defined !", commTab[0]));

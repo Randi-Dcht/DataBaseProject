@@ -10,9 +10,11 @@ public class Main {
     private static CommandParser cp;
     private static Sql db;
     public static Confirmable commandToConfirm;
+    static Scanner input;
 
     public static void main(String[] args)
     {
+        input = new Scanner(System.in);
         Saving.REOPEN("basedonnee");
         System.out.println("Database usage");
         System.out.println("@author: Randy Dauchot & Guillaume Cardoen");
@@ -26,10 +28,10 @@ public class Main {
         }
 
         checkFuncDep();
+        db.refreshDependenciesMap();
 
         cp = new CommandParser(db);
 
-        Scanner input = new Scanner(System.in);
         while (true) {
             System.out.println("Command : ");
             String comm = input.nextLine();
@@ -41,7 +43,7 @@ public class Main {
     }
 
     public static void checkFuncDep() {
-        if (! db.doesTableExists("FuncDep")) {
+        if (! db.tableExists("FuncDep")) {
             if (db.createTable("FuncDep", "table_name text, lhs text, rhs text"))
                 System.out.println("The table FuncDep was automatically created !");
             else
@@ -51,13 +53,11 @@ public class Main {
 
     public static String askDatabasePath() {
         System.out.println("Please, enter the path to the database : ");
-        Scanner input = new Scanner(System.in);
         String path = input.nextLine();
         if (! new File(path).exists()) {
             System.err.println("The given path is incorrect !");
             return askDatabasePath();
         }
-        input.close();
         return path;
     }
 
