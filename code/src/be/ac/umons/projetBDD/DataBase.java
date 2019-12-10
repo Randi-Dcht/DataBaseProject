@@ -35,11 +35,6 @@ public class DataBase implements Serializable
     }
 
         /*
-  public void funcDept(String table,String lhs, String rhs)
-  {
-    String[] lhs2 = lhs.split(" ");
-  }
-
   public boolean BCNF(String Table)
   {
   }
@@ -47,12 +42,5 @@ public class DataBase implements Serializable
   public boolean 3NF(String Table)
   {
   }
-
-  public void addDependency()
-  {
-  }
-
-  public String[] removeDependency()
-  {
-  }*/
+*/
 }
