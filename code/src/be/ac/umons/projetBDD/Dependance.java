@@ -1,10 +1,11 @@
 package be.ac.umons.projetBDD;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Dependance
+public class Dependance implements Serializable
 {
     private List<String> lhs;
     private String rhs;
