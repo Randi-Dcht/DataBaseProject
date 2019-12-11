@@ -1,9 +1,6 @@
 package be.ac.umons.projetBDD;
 
-import be.ac.umons.projetBDD.Commands.AddDF;
-import be.ac.umons.projetBDD.Commands.Command;
-import be.ac.umons.projetBDD.Commands.IsBCNF;
-import be.ac.umons.projetBDD.Commands.ListDF;
+import be.ac.umons.projetBDD.Commands.*;
 
 public class CommandParser {
 
@@ -30,6 +27,9 @@ public class CommandParser {
                 break;
             case "isbcnf":
                 command = new IsBCNF(db, commTab);
+                break;
+            case "checkdf":
+                command = new CheckDF(db, commTab);
                 break;
             default:
                 System.err.println(String.format("Command \"%s\" isn't defined !", commTab[0]));
