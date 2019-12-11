@@ -16,7 +16,7 @@ public class Sql
 {
     final String url;
     private Connection connection;
-    private Map<String, List<Dependance>> dependenciesMap;
+    private Map<String, List<Dependence>> dependenciesMap;
 
     public Sql(String url)
     {
@@ -121,7 +121,7 @@ public class Sql
         ResultSet deps = executeQuery("SELECT * FROM FuncDep;");
         try {
             while (deps.next()) {
-                Dependance dep = new Dependance(new DataBase(deps.getString(1)), deps.getString(2), deps.getString(3));
+                Dependence dep = new Dependence(new DataBase(deps.getString(1)), deps.getString(2), deps.getString(3));
                 addIntoDependenciesMap(dep);
             }
         } catch (SQLException e) {
@@ -129,13 +129,13 @@ public class Sql
         }
     }
 
-    public void addIntoDependenciesMap(Dependance dep) {
+    public void addIntoDependenciesMap(Dependence dep) {
         if (! dependenciesMap.containsKey(dep.getTableName()))
             dependenciesMap.put(dep.getTableName(), new ArrayList<>());
         dependenciesMap.get(dep.getTableName()).add(dep);
     }
 
-    public boolean addDependence(Dependance dep) {
+    public boolean addDependence(Dependence dep) {
         String lhs = "";
         for (int i = 0; i < dep.getLhs().size(); i++) {
             lhs += dep.getLhs().get(i);
@@ -166,7 +166,7 @@ public class Sql
         }
     }
 
-    public Map<String, List<Dependance>> getDependenciesMap() {
+    public Map<String, List<Dependence>> getDependenciesMap() {
         return dependenciesMap;
     }
 

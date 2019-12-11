@@ -1,6 +1,6 @@
 package be.ac.umons.projetBDD.Commands;
 
-import be.ac.umons.projetBDD.Dependance;
+import be.ac.umons.projetBDD.Dependence;
 import be.ac.umons.projetBDD.Sql;
 
 import java.util.*;
@@ -18,22 +18,22 @@ public class IsBCNF extends Command {
             System.err.println(String.format("ERROR : The given table (%s) wasn't found !", args[1]));
             return;
         }
-        List<Dependance> depList = db.getDependenciesMap().get(args[1]);
+        List<Dependence> depList = db.getDependenciesMap().get(args[1]);
         if (depList == null) {
             System.out.println(String.format("The table (%s) is in BCNF !", args[1]));
             return;
         }
-        for (Dependance df : depList) {
+        for (Dependence df : depList) {
             if (isTrivial(df))
                 continue;
             List<String> lhs = new ArrayList<>(df.getLhs());
             Set<String> determinedOne = new HashSet<>(lhs); // no duplicates
-            List<Dependance> tempList = new LinkedList<>(depList); // copy the list
+            List<Dependence> tempList = new LinkedList<>(depList); // copy the list
             boolean changed = true;
             while (changed && tempList.size() != 0) {
                 changed = false;
-                for (Iterator<Dependance> it = tempList.listIterator(); it.hasNext();) {
-                    Dependance df2 = it.next();
+                for (Iterator<Dependence> it = tempList.listIterator(); it.hasNext();) {
+                    Dependence df2 = it.next();
                     if (lhs.containsAll(df2.getLhs())) {
                         determinedOne.add(df2.getRhs());
                         lhs.add(df2.getRhs());
@@ -51,7 +51,7 @@ public class IsBCNF extends Command {
 
     }
 
-    private boolean isTrivial(Dependance df) {
+    private boolean isTrivial(Dependence df) {
         return df.getLhs().contains(df.getRhs());
     }
 

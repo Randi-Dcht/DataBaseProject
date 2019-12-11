@@ -1,7 +1,6 @@
 package be.ac.umons.projetBDD.Commands;
 
-import be.ac.umons.projetBDD.Dependance;
-import be.ac.umons.projetBDD.Main;
+import be.ac.umons.projetBDD.Dependence;
 import be.ac.umons.projetBDD.Sql;
 
 import java.sql.ResultSet;
@@ -24,13 +23,13 @@ public class CheckDF extends Command {
             return;
 
         }
-        List<Dependance> deps = db.getDependenciesMap().get(args[1]);
+        List<Dependence> deps = db.getDependenciesMap().get(args[1]);
         if (deps == null) {
             System.out.println("This table has no DF !");
             return;
         }
 
-        for (Dependance dep : deps) {
+        for (Dependence dep : deps) {
             boolean messageAlreadyShowed = false;
             Map<String, String> verifMap = new HashMap<>();
             List<String> lhsList = dep.getLhs();
