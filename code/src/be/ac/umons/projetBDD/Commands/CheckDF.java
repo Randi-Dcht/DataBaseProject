@@ -29,6 +29,8 @@ public class CheckDF extends Command {
             return;
         }
 
+        boolean errorInDF = false;
+
         for (Dependence dep : deps) {
             boolean messageAlreadyShowed = false;
             Map<String, String> verifMap = new HashMap<>();
@@ -43,9 +45,9 @@ public class CheckDF extends Command {
             try {
                 while (rs.next()) {
                     String lhsValue = "";
-                    for (int i = 1; i < rs.getRow() - 1; i++) { // -1 = rhs
+                    for (int i = 0; i < lhsList.size(); i++) {
                         lhsValue += rs.getString(i + 1);
-                        if (i != rs.getRow() - 2)
+                        if (i != lhsList.size() - 1)
                             lhsValue += ",";
                     }
                     String rhsValue = rs.getString(rhs);
@@ -57,15 +59,18 @@ public class CheckDF extends Command {
                             }
                             System.out.println(String.format("    Entry %d : %s -> %s", rs.getRow(), lhsValue, rhsValue));
                             System.out.println(String.format("    Contradiction with : %s -> %s\n", lhsValue, verifMap.get(lhsValue)));
+                            errorInDF = true;
                         }
                     } else {
-                        verifMap.put(lhs, rhsValue); //TODO : Ajouter message comme quoi c'est bon
+                        verifMap.put(lhsValue, rhsValue);
                     }
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
+        if (! errorInDF)
+            System.out.println(String.format("All the DF all the table (%s) are respected !", args[1]));
     }
 
     @Override

@@ -55,8 +55,6 @@ public class IsBCNF extends Command {
         return df.getLhs().contains(df.getRhs());
     }
 
-
-
     @Override
     public String getUsage() {
         return "IsBCNF <table_name>";
