@@ -88,6 +88,23 @@ public class Sql
         }
     }
 
+    public boolean removeTuple(String tableName, String condition) {
+        try
+        {
+            String comm = String.format("DELETE FROM %s WHERE %s", tableName, condition);
+            PreparedStatement precmd = connection.prepareStatement(comm);
+            precmd.executeUpdate();
+            Saving.WRITE(String.format("Successfully deleted tuple where %s from %s", condition, tableName));
+            return true;
+        }
+        catch(Exception e)
+        {
+            System.err.println(String.format("Error while deleting from %s : %s", tableName, e.getMessage()));
+            Saving.WRITE(String.format("Error while deleting from %s : %s", tableName, e.getMessage()));
+            return false;
+        }
+    }
+
     public boolean tableExists(String tableName) {
         try
         {
