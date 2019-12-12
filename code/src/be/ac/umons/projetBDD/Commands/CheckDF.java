@@ -1,10 +1,13 @@
 package be.ac.umons.projetBDD.Commands;
 
 import be.ac.umons.projetBDD.Dependence;
+import be.ac.umons.projetBDD.Main;
 import be.ac.umons.projetBDD.Sql;
 
+import java.awt.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,8 +35,9 @@ public class CheckDF extends Command {
         boolean errorInDF = false;
 
         for (Dependence dep : deps) {
+            List<Point> idContradictionList = new ArrayList<>();
             boolean messageAlreadyShowed = false;
-            Map<String, String> verifMap = new HashMap<>();
+            Map<String, IntString> verifMap = new HashMap<>();
             List<String> lhsList = dep.getLhs();
             String commandPart = "";
             String lhs = lhsList.toString().substring(1, lhsList.toString().length() - 1);
@@ -52,22 +56,28 @@ public class CheckDF extends Command {
                     }
                     String rhsValue = rs.getString(rhs);
                     if (verifMap.containsKey(lhsValue)) {
-                        if (verifMap.get(lhsValue) != rhsValue) {
+                        if (! verifMap.get(lhsValue).s.equals(rhsValue)) {
                             if (! messageAlreadyShowed) {
                                 System.out.println(String.format("The DF \"%s -> %s\" isn't respected in table %s", lhs, rhs, args[1]));
                                 messageAlreadyShowed = true;
                             }
                             System.out.println(String.format("    Entry %d : %s -> %s", rs.getRow(), lhsValue, rhsValue));
-                            System.out.println(String.format("    Contradiction with : %s -> %s\n", lhsValue, verifMap.get(lhsValue)));
+                            System.out.println(String.format("    Contradiction with entry %d : %s -> %s\n", verifMap.get(lhsValue).x, lhsValue, verifMap.get(lhsValue).s));
+                            idContradictionList.add(new Point(rs.getRow(), 0));
                             errorInDF = true;
                         }
                     } else {
-                        verifMap.put(lhsValue, rhsValue);
+                        verifMap.put(lhsValue, new IntString(rhsValue, rs.getRow()));
                     }
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+            if (idContradictionList.size() != 0) {
+                Main.contradictionsIDs.addAll(idContradictionList);
+                Main.contradictionsTableName = args[1];
+            }
+
         }
         if (! errorInDF)
             System.out.println(String.format("All the DF all the table (%s) are respected !", args[1]));
@@ -76,5 +86,14 @@ public class CheckDF extends Command {
     @Override
     public String getUsage() {
         return null;
+    }
+
+    public class IntString {
+        int x;
+        String s;
+        public IntString(String s, int x) {
+            this.s = s;
+            this.x = x;
+        }
     }
 }

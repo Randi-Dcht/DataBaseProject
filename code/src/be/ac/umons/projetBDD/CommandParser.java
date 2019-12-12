@@ -31,6 +31,10 @@ public class CommandParser {
             case "checkdf":
                 command = new CheckDF(db, commTab);
                 break;
+            case "removeconflictstuples":
+            case "rct":
+                command = new RemoveConflictsTuples(db, commTab);
+                break;
             default:
                 System.err.println(String.format("Command \"%s\" isn't defined !", commTab[0]));
                 return;

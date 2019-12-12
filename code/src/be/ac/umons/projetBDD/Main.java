@@ -2,6 +2,7 @@ package be.ac.umons.projetBDD;
 
 import be.ac.umons.projetBDD.Commands.Confirmable;
 
+import java.awt.*;
 import java.io.File;
 import java.util.*;
 
@@ -10,10 +11,13 @@ public class Main {
     private static CommandParser cp;
     private static Sql db;
     public static Confirmable commandToConfirm;
+    public static String contradictionsTableName;
+    public static Set<Point> contradictionsIDs;
     static Scanner input;
 
     public static void main(String[] args)
     {
+        contradictionsIDs = new HashSet<>();
         input = new Scanner(System.in);
         Saving.REOPEN("basedonnee");
         System.out.println("Database usage");
