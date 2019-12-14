@@ -17,7 +17,6 @@ public class Main {
 
     public static void main(String[] args)
     {
-        contradictionsIDs = new HashSet<>();
         input = new Scanner(System.in);
         Saving.REOPEN("basedonnee");
         System.out.println("Database usage");

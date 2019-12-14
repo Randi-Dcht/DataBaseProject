@@ -24,15 +24,23 @@ public class AddDF extends Command implements Confirmable {
         return "AddDF <tableName> <lhs> <rhs>";
     }
 
-    private void addDF(String tableName, String lhs, String rhs) { // TODO : Check si la DF est valide pour la table :D
+    private void addDF(String tableName, String lhs, String rhs) {
         if (! db.tableExists(tableName) && ! confirmed) {
             System.out.println(String.format("Warning : the table %s doesn't exist ! Execute \"ExecAnyway\" if you still want to add the dependency.", tableName));
             Main.commandToConfirm = this;
             return;
         }
         Dependence dep = new Dependence(new DataBase(tableName), lhs, rhs);
-        if (db.addDependence(dep))
-            System.out.println("DF has been added !");
+        if ((new RemoveRedundantDependencies(db, new String[] {"rdd", args[1]})).isRedundant(dep)) {
+            System.out.println(String.format("Warning : The dependence (%s -> %s) is redundant in the table (%s). Execute \"ExecAnyway\" if you still want to add the dependency.", dep.getLhs(), dep.getRhs(), args[1]));
+            Main.commandToConfirm = this;
+        } else if (! (new CheckDF(db, new String[] {"CheckDF", args[1]})).checkDF(dep)) {
+            System.out.println("Execute \"ExecAnyway\" if you still want to add the dependency.");
+            Main.commandToConfirm = this;
+        } else {
+            if (db.addDependence(dep))
+                System.out.println("DF has been added !");
+        }
     }
 
     @Override

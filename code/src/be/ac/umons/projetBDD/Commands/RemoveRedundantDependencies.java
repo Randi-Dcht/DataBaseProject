@@ -24,30 +24,9 @@ public class RemoveRedundantDependencies extends Command {
             return;
         }
         List<Dependence> redundantDeps = new ArrayList<>();
-        for (int i = 0; i < dependenceList.size(); i++) {
-            if (dependenceList.get(i).getLhs().contains(dependenceList.get(i).getRhs())) {
-                redundantDeps.add(dependenceList.get(i));
-                continue;
-            }
-            List<String> foundOne = new ArrayList<>(dependenceList.get(i).getLhs());
-            List<Dependence> tmpDeps = new LinkedList<>(dependenceList);
-            boolean modified = true;
-            while (modified && tmpDeps.size() > 0) {
-                modified = false;
-                int j = 0;
-                for (Iterator<Dependence> it = tmpDeps.listIterator(); it.hasNext(); j++) {
-                    Dependence dep = it.next();
-                    if (i == j)
-                        continue;
-                    if (foundOne.containsAll(dep.getLhs())) {
-                        foundOne.add(dep.getRhs());
-                        it.remove();
-                        modified = true;
-                    }
-                }
-            }
-            if (foundOne.contains(dependenceList.get(i).getRhs()))
-                redundantDeps.add(dependenceList.get(i));
+        for (Dependence dependence : dependenceList) {
+            if (isRedundant(dependence))
+                redundantDeps.add(dependence);
         }
         if (redundantDeps.size() == 0)
             System.out.println("No logical dependence has been found !");
@@ -61,6 +40,30 @@ public class RemoveRedundantDependencies extends Command {
                 db.removeTuple("FuncDep", String.format("table_name='%s' AND lhs='%s' AND rhs='%s'", args[1], lhs.substring(1, lhs.length() - 1), dep.getRhs()));
             }
         }
+    }
+
+    public boolean isRedundant(Dependence dep) {
+        List<Dependence> dependenceList = db.getDependenciesMap().get(args[1]);
+        if (dep.getLhs().contains(dep.getRhs())) {
+            return true;
+        }
+        List<String> foundOne = new ArrayList<>(dep.getLhs());
+        List<Dependence> tmpDeps = new LinkedList<>(dependenceList);
+        boolean modified = true;
+        while (modified && tmpDeps.size() > 0) {
+            modified = false;
+            for (Iterator<Dependence> it = tmpDeps.listIterator(); it.hasNext();) {
+                Dependence d = it.next();
+                if (dep == d)
+                    continue;
+                if (foundOne.containsAll(dep.getLhs())) {
+                    foundOne.add(dep.getRhs());
+                    it.remove();
+                    modified = true;
+                }
+            }
+        }
+        return foundOne.contains(dep.getRhs());
     }
 
     private boolean askForDeleting(Dependence oneToDel) {
