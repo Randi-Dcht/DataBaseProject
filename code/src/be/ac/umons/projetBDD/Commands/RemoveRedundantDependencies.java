@@ -35,10 +35,8 @@ public class RemoveRedundantDependencies extends Command {
         for (Dependence dep : redundantDeps)
             System.out.println(String.format("    %s -> %s", dep.getLhs(), dep.getRhs()));
         for (Dependence dep: redundantDeps) {
-            if (askForDeleting(dep)) {
-                String lhs = dep.getLhs().toString();
-                db.removeTuple("FuncDep", String.format("table_name='%s' AND lhs='%s' AND rhs='%s'", args[1], lhs.substring(1, lhs.length() - 1), dep.getRhs()));
-            }
+            if (askForDeleting(dep))
+                db.removeDependence(dep);
         }
     }
 

@@ -166,6 +166,15 @@ public class Sql
         return false;
     }
 
+    public boolean removeDependence(Dependence dep) {
+        String lhs = dep.getLhs().toString();
+        if (removeTuple("FuncDep", String.format("table_name='%s' AND lhs='%s' AND rhs='%s'", dep.getTableName(), lhs.substring(1, lhs.length() - 1), dep.getRhs()))) {
+            dependenciesMap.get(dep.getTableName()).remove(dep);
+            return true;
+        }
+        return false;
+    }
+
     public boolean close()
     {
         try
