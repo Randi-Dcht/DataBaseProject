@@ -35,6 +35,10 @@ public class CommandParser {
             case "rct":
                 command = new RemoveConflictsTuples(db, commTab);
                 break;
+            case "removeredundantdependencies":
+            case "rdd":
+                command = new RemoveRedundantDependencies(db, commTab);
+                break;
             default:
                 System.err.println(String.format("Command \"%s\" isn't defined !", commTab[0]));
                 return;

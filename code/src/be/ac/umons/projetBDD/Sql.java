@@ -28,7 +28,7 @@ public class Sql
     {
         try
         {
-            Class.forName("org.sqlite.JDBC"); /*<= permet de dire le fichier jar*/
+//            Class.forName("org.sqlite.JDBC"); /*<= permet de dire le fichier jar*/
             connection = DriverManager.getConnection(url + fichier);
             /*Supprimer =>*/ Saving.WRITE("Successfully connected with the database");
             return true;

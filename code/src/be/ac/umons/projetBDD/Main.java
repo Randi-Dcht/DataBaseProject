@@ -13,7 +13,7 @@ public class Main {
     public static Confirmable commandToConfirm;
     public static String contradictionsTableName;
     public static Set<Point> contradictionsIDs;
-    static Scanner input;
+    public static Scanner input;
 
     public static void main(String[] args)
     {
