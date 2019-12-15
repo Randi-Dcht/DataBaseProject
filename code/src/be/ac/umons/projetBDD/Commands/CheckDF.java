@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.*;
 import java.util.List;
 
-public class CheckDF extends Command {
+public class CheckDF extends CommandDF {
 
     private boolean errorInDF = false;
 
@@ -21,16 +21,7 @@ public class CheckDF extends Command {
 
     @Override
     protected void doAction() {
-        if (! db.tableExists(args[1])) {
-            System.err.println(String.format("ERROR : The table (%s) doesn't exist !", args[1]));
-            return;
-
-        }
         List<Dependence> deps = db.getDependenciesMap().get(args[1]);
-        if (deps == null) {
-            System.out.println("This table has no DF !");
-            return;
-        }
 
         for (Dependence dep : deps) {
             checkDF(dep);

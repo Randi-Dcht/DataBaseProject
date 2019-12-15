@@ -7,7 +7,7 @@ import be.ac.umons.projetBDD.Sql;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CheckDFAttr extends Command {
+public class CheckDFAttr extends CommandDF {
 
     List<String> names;
     private boolean errorInDF = false;
@@ -20,17 +20,7 @@ public class CheckDFAttr extends Command {
 
     @Override
     protected void doAction() {
-        if (! db.tableExists(args[1])) {
-            System.err.println(String.format("ERROR : The table (%s) doesn't exist !", args[1]));
-            return;
-
-        }
-        List<Dependence> tmp = db.getDependenciesMap().get(args[1]);
-        if (tmp == null) {
-            System.out.println("This table has no DF !");
-            return;
-        }
-        ArrayList<Dependence> deps = new ArrayList<>(tmp);
+        ArrayList<Dependence> deps = new ArrayList<>(db.getDependenciesMap().get(args[1]));
 
         for (Dependence dep : deps) {
             if (checkAttr(dep) || askForDeleting(dep)) {

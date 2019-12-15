@@ -6,7 +6,7 @@ import be.ac.umons.projetBDD.Sql;
 
 import java.util.*;
 
-public class RemoveRedundantDependencies extends Command {
+public class RemoveRedundantDependencies extends CommandDF {
     public RemoveRedundantDependencies(Sql db, String[] args) {
         super(db, args);
         possibleNumberOfArgs.add(1);
@@ -15,15 +15,7 @@ public class RemoveRedundantDependencies extends Command {
 
     @Override
     protected void doAction() {
-        if (! db.tableExists(args[1])) {
-            System.err.println(String.format("The given table (%s) doesn't exist !", args[1]));
-            return;
-        }
         List<Dependence> dependenceList = db.getDependenciesMap().get(args[1]);
-        if (dependenceList == null) {
-            System.out.println("There is no dependence for this table !");
-            return;
-        }
         List<Dependence> redundantDeps = new ArrayList<>();
         for (Dependence dependence : dependenceList) {
             if (isRedundant(dependence))
