@@ -39,6 +39,10 @@ public class CommandParser {
             case "rdd":
                 command = new RemoveRedundantDependencies(db, commTab);
                 break;
+            case "checkdfattr":
+            case "cdfa":
+                command = new CheckDFAttr(db, commTab);
+                break;
             default:
                 System.err.println(String.format("Command \"%s\" isn't defined !", commTab[0]));
                 return;

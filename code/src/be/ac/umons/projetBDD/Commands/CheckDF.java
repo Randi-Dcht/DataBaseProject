@@ -94,7 +94,7 @@ public class CheckDF extends Command {
 
     @Override
     public String getUsage() {
-        return null;
+        return "CheckDF <table_name>";
     }
 
     public class IntString {
