@@ -10,6 +10,7 @@ public class RemoveRedundantDependencies extends Command {
     public RemoveRedundantDependencies(Sql db, String[] args) {
         super(db, args);
         possibleNumberOfArgs.add(1);
+        possibleNumberOfArgs.add(2);
     }
 
     @Override
@@ -34,9 +35,13 @@ public class RemoveRedundantDependencies extends Command {
             System.out.println(String.format("These logical dependencies has been found in the table (%s):", args[1]));
         for (Dependence dep : redundantDeps)
             System.out.println(String.format("    %s -> %s", dep.getLhs(), dep.getRhs()));
-        for (Dependence dep: redundantDeps) {
-            if (askForDeleting(dep))
-                db.removeDependence(dep);
+        if (! args[2].equals("list")) {
+            if (! args[2].equals(""))
+                System.err.println(String.format("Warning : %s has been ignored !", args[2]));
+            for (Dependence dep: redundantDeps) {
+                if (askForDeleting(dep))
+                    db.removeDependence(dep);
+            }
         }
     }
 
@@ -72,6 +77,6 @@ public class RemoveRedundantDependencies extends Command {
 
     @Override
     public String getUsage() {
-        return "(RemoveLogicalDependencies | rld) <table_name>";
+        return "(RemoveLogicalDependencies | rdd) <table_name>";
     }
 }
