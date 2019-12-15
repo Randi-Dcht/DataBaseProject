@@ -3,7 +3,7 @@ package be.ac.umons.projetBDD.Commands;
 import be.ac.umons.projetBDD.Sql;
 import be.ac.umons.projetBDD.Dependence;
 
-public class ListDF extends Command {
+public class ListDF extends CommandDF {
 
     public ListDF(Sql db, String[] args) {
         super(db, args);
@@ -31,8 +31,6 @@ public class ListDF extends Command {
 
     private void listDF(String tableName) {
         System.out.println(String.format("DF in %s : (<lhs> -> <rhs>)", tableName));
-        if (! db.getDependenciesMap().containsKey(tableName))
-            System.err.println(String.format("The table %s doesn't exist !", tableName));
         for (Dependence dep: db.getDependenciesMap().get(tableName))
             System.out.println(String.format("  %s -> %s", dep.getLhs(), dep.getRhs()));
     }

@@ -5,7 +5,7 @@ import be.ac.umons.projetBDD.Sql;
 
 import java.util.*;
 
-public class IsBCNF extends Command {
+public class IsBCNF extends CommandDF {
 
     public IsBCNF(Sql db, String[] args) {
         super(db, args);
@@ -14,15 +14,7 @@ public class IsBCNF extends Command {
 
     @Override
     protected void doAction() {
-        if (! db.tableExists(args[1])) {
-            System.err.println(String.format("ERROR : The given table (%s) wasn't found !", args[1]));
-            return;
-        }
         List<Dependence> depList = db.getDependenciesMap().get(args[1]);
-        if (depList == null) {
-            System.out.println(String.format("The table (%s) is in BCNF !", args[1]));
-            return;
-        }
         for (Dependence df : depList) {
             if (isTrivial(df))
                 continue;

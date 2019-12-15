@@ -28,7 +28,7 @@ public class Sql
     {
         try
         {
-            Class.forName("org.sqlite.JDBC"); /*<= permet de dire le fichier jar*/
+//            Class.forName("org.sqlite.JDBC"); /*<= permet de dire le fichier jar*/
             connection = DriverManager.getConnection(url + fichier);
             /*Supprimer =>*/ Saving.WRITE("Successfully connected with the database");
             return true;
@@ -84,6 +84,23 @@ public class Sql
         {
             System.err.println(String.format("Error while inserting into %s : %s", tableName, e.getMessage()));
             Saving.WRITE(String.format("Error while inserting into %s : %s", tableName, e.getMessage()));
+            return false;
+        }
+    }
+
+    public boolean removeTuple(String tableName, String condition) {
+        try
+        {
+            String comm = String.format("DELETE FROM %s WHERE %s", tableName, condition);
+            PreparedStatement precmd = connection.prepareStatement(comm);
+            precmd.executeUpdate();
+            Saving.WRITE(String.format("Successfully deleted tuple where %s from %s", condition, tableName));
+            return true;
+        }
+        catch(Exception e)
+        {
+            System.err.println(String.format("Error while deleting from %s : %s", tableName, e.getMessage()));
+            Saving.WRITE(String.format("Error while deleting from %s : %s", tableName, e.getMessage()));
             return false;
         }
     }
@@ -144,6 +161,15 @@ public class Sql
         }
         if (insertIntoTable("FuncDep", String.format("\"%s\", \"%s\", \"%s\"", dep.getTableName(), lhs, dep.getRhs()))) {
             addIntoDependenciesMap(dep);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean removeDependence(Dependence dep) {
+        String lhs = dep.getLhs().toString();
+        if (removeTuple("FuncDep", String.format("table_name='%s' AND lhs='%s' AND rhs='%s'", dep.getTableName(), lhs.substring(1, lhs.length() - 1), dep.getRhs()))) {
+            dependenciesMap.get(dep.getTableName()).remove(dep);
             return true;
         }
         return false;

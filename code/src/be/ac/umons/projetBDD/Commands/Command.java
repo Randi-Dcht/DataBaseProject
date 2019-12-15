@@ -24,6 +24,8 @@ public abstract class Command {
     protected abstract void doAction();
 
     public boolean checkArgsNumber() {
+        if (possibleNumberOfArgs.contains(-1))
+            return true;
         if (! possibleNumberOfArgs.contains(args.length - 1)) {
             System.err.println(String.format("Command %s takes %s arguments.\nUsage : %s", args[0], possibleNumberOfArgs, getUsage()));
             return false;
