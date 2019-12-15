@@ -1,6 +1,6 @@
 package be.ac.umons.projetBDD;
 
-import be.ac.umons.projetBDD.GUI.DataBase;
+import be.ac.umons.projetBDD.GUI.DataGui;
 
 import java.io.*;
 import java.util.*;
@@ -39,27 +39,4 @@ public class Saving
         ecrire.close();
     }
 
-    public static void saveData(String file, DataBase db)
-    {
-        try
-        {
-            ObjectOutputStream exit = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(new File("./misc/"+file+".sgbd"))));
-            exit.writeObject(db);
-            exit.close();
-        }
-        catch (IOException ignored){System.out.println(ignored);} //TODO : gére cela pour pas vide !
-    }
-
-    public static DataBase giveData(String file)
-    {
-        DataBase db = null;
-        try
-        {
-            ObjectInputStream in = new ObjectInputStream(new BufferedInputStream(new FileInputStream(new File("./misc/"+file+".sgbd"))));
-            db = (DataBase) in.readObject();
-            in.close();
-        }
-        catch (IOException | ClassNotFoundException ignored){}
-        return db;
-    }
 }

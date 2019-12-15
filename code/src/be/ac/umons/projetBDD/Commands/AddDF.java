@@ -1,6 +1,5 @@
 package be.ac.umons.projetBDD.Commands;
 
-import be.ac.umons.projetBDD.GUI.DataBase;
 import be.ac.umons.projetBDD.Sql;
 import be.ac.umons.projetBDD.Dependence;
 import be.ac.umons.projetBDD.Main;

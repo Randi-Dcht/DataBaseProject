@@ -4,8 +4,6 @@ package be.ac.umons.projetBDD;
 /*java -classpath ".:sqlite-jdbc-3.27.2.1.jar" BaseDonne*/
 /*=>!utilise le jar : sqlite-jdbc-3.27.2.1.jar!<=*/
 
-import be.ac.umons.projetBDD.GUI.DataBase;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
