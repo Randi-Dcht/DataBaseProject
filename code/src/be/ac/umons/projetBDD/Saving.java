@@ -1,7 +1,5 @@
 package be.ac.umons.projetBDD;
 
-import be.ac.umons.projetBDD.GUI.DataGui;
-
 import java.io.*;
 import java.util.*;
 import java.text.*;
