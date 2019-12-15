@@ -5,12 +5,12 @@ import be.ac.umons.projetBDD.Dependence;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Bridge implements Serializable
+public class DataBase implements Serializable
 {
     private ArrayList<Dependence> df;
     private String nameSql; /*name with .db*/
 
-    public Bridge(String name)
+    public DataBase(String name)
     {
         nameSql = name;
         df = new ArrayList<Dependence>();

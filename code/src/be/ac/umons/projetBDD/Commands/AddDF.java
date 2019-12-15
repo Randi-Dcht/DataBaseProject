@@ -30,7 +30,7 @@ public class AddDF extends Command implements Confirmable {
             Main.commandToConfirm = this;
             return;
         }
-        Dependence dep = new Dependence(new DataBase(tableName), lhs, rhs);
+        Dependence dep = new Dependence(tableName, lhs, rhs);
         if ((new RemoveRedundantDependencies(db, new String[] {"rdd", args[1]})).isRedundant(dep)) {
             System.out.println(String.format("Warning : The dependence (%s -> %s) is redundant in the table (%s). Execute \"ExecAnyway\" if you still want to add the dependency.", dep.getLhs(), dep.getRhs(), args[1]));
             Main.commandToConfirm = this;

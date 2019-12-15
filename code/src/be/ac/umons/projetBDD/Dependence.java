@@ -11,9 +11,9 @@ public class Dependence implements Serializable
 {
     private List<String> lhs;
     private String rhs;
-    private DataBase tableName;
+    private String tableName;
 
-    public Dependence(DataBase tableName, String lhs, String rhs) { // TODO : Check for multi-lhs;
+    public Dependence(String tableName, String lhs, String rhs) { // TODO : Check for multi-lhs;
         this.tableName = tableName;
         this.lhs = new ArrayList<>();
         this.lhs.addAll(Arrays.asList(lhs.split(",")));

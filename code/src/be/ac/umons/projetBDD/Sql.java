@@ -138,7 +138,7 @@ public class Sql
         ResultSet deps = executeQuery("SELECT * FROM FuncDep;");
         try {
             while (deps.next()) {
-                Dependence dep = new Dependence(new DataBase(deps.getString(1)), deps.getString(2), deps.getString(3));
+                Dependence dep = new Dependence(deps.getString(1), deps.getString(2), deps.getString(3));
                 addIntoDependenciesMap(dep);
             }
         } catch (SQLException e) {
