@@ -22,7 +22,7 @@ public class Saving
     {
         try
         {
-            ecrire = new PrintWriter(new BufferedWriter(new FileWriter("./misc/"+ fichier +".saving",true)));
+            ecrire = new PrintWriter(new BufferedWriter(new FileWriter("./misc/Other/"+ fichier +".saving",true)));
             ecrire.println("Open the new session -- @auteur: Randy Dauchot & Guillaume Cardoen -- #projet Bachelier Base de donnée 2019");
         }
         catch(Exception e)

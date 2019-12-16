@@ -20,7 +20,7 @@ public class TestJunit
     @Before
     public void  launch()
     {
-        Saving.REOPEN("../misc/test");
+        Saving.REOPEN("test");
         sql = new Sql("jdbc:sqlite:");
     }
 
