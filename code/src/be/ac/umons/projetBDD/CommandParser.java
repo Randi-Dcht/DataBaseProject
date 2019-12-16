@@ -1,6 +1,13 @@
 package be.ac.umons.projetBDD;
 
-import be.ac.umons.projetBDD.Commands.*;
+import be.ac.umons.projetBDD.Commands.AddDF;
+import be.ac.umons.projetBDD.Commands.CheckDF;
+import be.ac.umons.projetBDD.Commands.CheckDFAttr;
+import be.ac.umons.projetBDD.Commands.Command;
+import be.ac.umons.projetBDD.Commands.IsBCNF;
+import be.ac.umons.projetBDD.Commands.ListDF;
+import be.ac.umons.projetBDD.Commands.RemoveConflictsTuples;
+import be.ac.umons.projetBDD.Commands.RemoveRedundantDependencies;
 
 public class CommandParser {
 
