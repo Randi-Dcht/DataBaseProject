@@ -16,7 +16,7 @@ public class TestJunit
   public void  launch()
   {
     Saving.REOPEN("../misc/test");
-    sql = new Sql("../misc/");
+    sql = new Sql("jdbc:sqlite:");
   }
 
   @After
@@ -28,8 +28,7 @@ public class TestJunit
   @Test
   public void testSqlConnect()
   {
-    assertFalse("Connect to the false dataBAse",sql.connect("test.bd"));
-    assertFalse("Connect to the exist dataBAse",sql.connect("test.db"));
+    assertTrue("Connect to the exist dataBAse",sql.connect("test.db"));
   }
 
   @Test
@@ -37,6 +36,14 @@ public class TestJunit
   {
     assertFalse("don't connect to dataBase",sql.createDatabase());
     sql.connect("test.db");
-    //assertTrue("after connect, create dataBase", sql.createDatabase());
+    assertTrue("after connect, create dataBase", sql.createDatabase());
+  }
+
+  @Test
+  public void createTable()
+  {
+    sql.connect("test.db");
+    sql.createDatabase();
+    assertTrue(sql.createTable("testJunit","lapin chasseur mort lol"));
   }
 }

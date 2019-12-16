@@ -10,18 +10,32 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * This class allows the connect, read and write in the dataBase.
+ * This class use the sqlLite dataBase.
+ * @author : Randy Dauchot & Guillaume Cardoen (étudiants en sciences informatique Umons)
+ */
 public class Sql
 {
     final String url;
     private Connection connection;
     private Map<String, List<Dependence>> dependenciesMap;
 
+    /**
+     * This contructor allows create a link with dataBase
+     * @param url is the string with the road to the dataFile
+     */
     public Sql(String url)
     {
         this.url = url;
         dependenciesMap = new HashMap<>();
     }
 
+    /**
+     * This method allows to connect to the dataBase SqlLite
+     * @param fichier who is the name of dataBase (.db)
+     * @return true if the connect is succesful and false
+     */
     public boolean connect(String fichier)
     {
         try
@@ -39,6 +53,10 @@ public class Sql
         }
     }
 
+    /**
+     * This method allows to create a dataBase in the file
+     * @return true if the dataBase is create and false
+     */
     public boolean createDatabase()
     {
         if(connection == null)
@@ -57,10 +75,17 @@ public class Sql
         }
     }
 
+    /**
+     * This method allows create a table in the dataBase with name of column
+     * @param tableName who is the name of table
+     * @param tableContent who is the name of the column
+     * @return true if the table is create and false
+     */
     public boolean createTable(String tableName, String tableContent) {
         try {
             Statement stat = connection.createStatement();
             stat.execute(String.format("CREATE TABLE %s(%s)", tableName, tableContent));
+            Saving.WRITE("The Table of " + tableName + "create with : " + tableContent);
             return true;
         } catch(Exception e)
         {
@@ -69,6 +94,11 @@ public class Sql
         }
     }
 
+    /**
+     * This method allows to insert in the specific table the value
+     * @param tableName who is the name of the table in the data file
+     * @param values who is the value to insert in the table
+     */
     public boolean insertIntoTable(String tableName, String values)
     {
         try
@@ -87,6 +117,12 @@ public class Sql
         }
     }
 
+    /**
+     * This method allows to delete the value in the specific table
+     * @param tableName who is the name of the table in the file
+     * @param condition allows specify the value who is deleted in the table
+     * @return true is the value is delete and false
+     */
     public boolean removeTuple(String tableName, String condition) {
         try
         {
@@ -104,6 +140,11 @@ public class Sql
         }
     }
 
+    /**
+     * This method allows the see if the table exist in the dataBase
+     * @param tableName who is the name of the table
+     * @return true if the table exist and false
+     */
     public boolean tableExists(String tableName) {
         try
         {
@@ -119,6 +160,11 @@ public class Sql
         }
     }
 
+    /**
+     * This method allows the give a SQL request in the dataBAse
+     * @param query is a request
+     * @return result (ResultSet) of the request
+     */
     public ResultSet executeQuery(String query) {
         try
         {
@@ -145,12 +191,21 @@ public class Sql
         }
     }
 
+    /**
+     * This method allows to add in map the couple name of Table and the dependence in the table
+     * @param dep who is a dependence
+     */
     public void addIntoDependenciesMap(Dependence dep) {
         if (! dependenciesMap.containsKey(dep.getTableName()))
             dependenciesMap.put(dep.getTableName(), new ArrayList<>());
         dependenciesMap.get(dep.getTableName()).add(dep);
     }
 
+    /**
+     * This method allows to put the new dependence int the dataBase and also in the map.
+     * @param dep who is the dependence to add
+     * @return true if the dependence is correctly add to table and false
+     */
     public boolean addDependence(Dependence dep) {
         String lhs = "";
         for (int i = 0; i < dep.getLhs().size(); i++) {
@@ -165,6 +220,11 @@ public class Sql
         return false;
     }
 
+    /**
+     * This method allow to delete a dependence in the dataBase and in map
+     * @param dep who is the dependence who is remove
+     * @return true if the dependence is remove and false
+     */
     public boolean removeDependence(Dependence dep) {
         String lhs = dep.getLhs().toString();
         if (removeTuple("FuncDep", String.format("table_name='%s' AND lhs='%s' AND rhs='%s'", dep.getTableName(), lhs.substring(1, lhs.length() - 1), dep.getRhs()))) {
@@ -174,6 +234,10 @@ public class Sql
         return false;
     }
 
+    /**
+     * This method allows to quit the dataBase correctly.
+     * @return true if the dataBAse is correctly close and false
+     */
     public boolean close()
     {
         try
@@ -191,10 +255,19 @@ public class Sql
         }
     }
 
+    /**
+     * this method allows to return the list of the dependence
+     * @return map of table and dependence
+     */
     public Map<String, List<Dependence>> getDependenciesMap() {
         return dependenciesMap;
     }
 
+    /**
+     * This method allows
+     * @param tableName who is the name of the table in the dataBAse
+     * @return list of the name [...]
+     */
     public List<String> getTableContentName(String tableName) {
         String comm = String.format("PRAGMA table_info('%s')", tableName);
         ResultSet rs = executeQuery(comm);
