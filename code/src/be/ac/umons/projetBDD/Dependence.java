@@ -1,6 +1,5 @@
 package be.ac.umons.projetBDD;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -11,7 +10,7 @@ import java.util.List;
  * Every dependence has a singular rhs who is a attributes define by lhs.
  * @author Randy Dauchot & Guillaume Cardoen (étudiants en sciences informatique Umons)
  */
-public class Dependence implements Serializable
+public class Dependence
 {
     private List<String> lhs;
     private String rhs;

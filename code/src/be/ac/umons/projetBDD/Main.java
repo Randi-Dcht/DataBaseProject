@@ -2,10 +2,16 @@ package be.ac.umons.projetBDD;
 
 import be.ac.umons.projetBDD.Commands.Confirmable;
 
-import java.awt.*;
+import java.awt.Point;
 import java.io.File;
-import java.util.*;
+import java.util.Scanner;
+import java.util.Set;
 
+/**
+ * This class allows to interaction between the dataBase and the user through
+ *    the command line in the terminal.
+ * @author Guillaume Cardoen (étudiant en sciences informatique Umons)
+ */
 public class Main {
 
     private static CommandParser cp;
@@ -15,6 +21,10 @@ public class Main {
     public static Set<Point> contradictionsIDs;
     public static Scanner input;
 
+    /**
+     * This method allows to launch the application in command line.
+     * This is the entry point in the application.
+     */
     public static void main(String[] args)
     {
         input = new Scanner(System.in);
@@ -45,6 +55,9 @@ public class Main {
         db.close();
     }
 
+    /**
+     * This method said to user, how does it create the dataBase of dependence
+     */
     public static void checkFuncDep() {
         if (! db.tableExists("FuncDep")) {
             if (db.createTable("FuncDep", "table_name text, lhs text, rhs text"))
@@ -54,6 +67,10 @@ public class Main {
         }
     }
 
+    /**
+     * This method allows to ask to enter the path of database in command line
+     * @return name of path (string)
+     */
     public static String askDatabasePath() {
         System.out.println("Please, enter the path to the database : ");
         String path = input.nextLine();
@@ -63,5 +80,4 @@ public class Main {
         }
         return path;
     }
-
 }
