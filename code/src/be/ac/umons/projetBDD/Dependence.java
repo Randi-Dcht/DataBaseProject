@@ -27,7 +27,7 @@ public class Dependence implements Serializable
     {
         this.tableName = tableName;
         this.lhs = new ArrayList<>();
-        this.lhs.addAll(Arrays.asList(lhs.split(" "))); /*the words separate by space*/
+        this.lhs.addAll(Arrays.asList(lhs.split(","))); /*the words separate by space*/
         this.rhs = rhs;
     }
 

@@ -53,8 +53,8 @@ public class TestJunit
   @Test
   public void testDependence()
   {
-    String test   = "randy guillaume basedonnee umons test";
-    String[] list = test.split(" ");
+    String test   = "randy,guillaume,basedonnee,umons,est";
+    String[] list = test.split(",");
     Dependence dp = new Dependence("test",test,"sql");
     assertEquals("The size of lhs", list.length, dp.getLhs().size());
     for(int i = 0 ; i < list.length ; i++)
