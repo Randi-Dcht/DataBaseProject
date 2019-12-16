@@ -1,0 +1,19 @@
+Open the new session -- @auteur: Randy Dauchot & Guillaume Cardoen -- #projet Bachelier Base de donnée 2019
+Close the session of dataBase
+___________________________________________________
+Open the new session -- @auteur: Randy Dauchot & Guillaume Cardoen -- #projet Bachelier Base de donnée 2019
+2019/12/16 21:06 : Linux : Successfully connected with the database : compileTest/testcreateT.db
+2019/12/16 21:06 : Linux : Successfully created : SQLite JDBC
+2019/12/16 21:06 : Linux : The Table of testJunitcreate with : Umons student matricule Java Python
+Close the session of dataBase
+___________________________________________________
+Open the new session -- @auteur: Randy Dauchot & Guillaume Cardoen -- #projet Bachelier Base de donnée 2019
+2019/12/16 21:06 : Linux : Successfully connected with the database : compileTest/testcreateD.db
+2019/12/16 21:06 : Linux : Successfully created : SQLite JDBC
+Close the session of dataBase
+___________________________________________________
+Open the new session -- @auteur: Randy Dauchot & Guillaume Cardoen -- #projet Bachelier Base de donnée 2019
+2019/12/16 21:06 : Linux : Successfully connected with the database : compileTest/testconnect.db
+2019/12/16 21:06 : Linux : La base de donnée est bien fermée ;-) 
+Close the session of dataBase
+___________________________________________________
