@@ -3,16 +3,17 @@
 <!--Allows to create the file .class of method command-->
   <target name="build">
     <mkdir dir="compile"/>
-    <javac srcdir="code/src" destdir="compile" encoding="utf8" classpath=".:compile:lib/sqlite-jdbc-3.27.2.1.jar">
+    <javac srcdir="code/" destdir="compile" encoding="utf8" classpath=".:compile:lib/sqlite-jdbc-3.27.2.1.jar:lib/jfxrt.jar:lib/junit-4.12.jar">
     </javac>
   </target>
 <!--Allows remove the repertory with .class-->
   <target name="clean">
     <delete dir ="compile"/>
+    <delete dir ="compileTest"/>
   </target>
   <!--Allows to run the application, after build-->
   <target name="run" depends="build">
-    <java classname="be.ac.umons.projetBDD.Main" classpath=".:compile:lib/sqlite-jdbc-3.27.2.1.jar"/>
+    <java classname="be.ac.umons.projetBDD.ChooseMain" classpath=".:compile:lib/sqlite-jdbc-3.27.2.1.jar:lib/jfxrt.jar"/>
   </target>
 
 
@@ -25,7 +26,7 @@
     <java classname="be.ac.umons.projetBDD.Main" classpath=".:compile:lib/sqlite-jdbc-3.27.2.1.jar"/>
   </target>
 <!--This quiet target allows to build and run the GUI application-->
-  <target name="GUI">
+  <target name="gui">
     <delete dir ="compile"/>
     <mkdir dir="compile"/>
     <javac srcdir="code/src" destdir="compile" encoding="utf8" classpath=".:compile:lib/sqlite-jdbc-3.27.2.1.jar"/>
