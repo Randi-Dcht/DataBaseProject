@@ -33,16 +33,16 @@ public class Sql
 
     /**
      * This method allows to connect to the dataBase SqlLite
-     * @param fichier who is the name of dataBase (.db)
+     * @param file who is the name of dataBase (.db)
      * @return true if the connect is succesful and false
      */
-    public boolean connect(String fichier)
+    public boolean connect(String file)
     {
         try
         {
 //            Class.forName("org.sqlite.JDBC"); /*<= permet de dire le fichier jar*/
-            connection = DriverManager.getConnection(url + fichier);
-            Saving.WRITE("Successfully connected with the database : " + fichier);
+            connection = DriverManager.getConnection(url + file);
+            Saving.WRITE("Successfully connected with the database : " + file);
             return true;
         }
         catch(Exception e)
@@ -202,7 +202,7 @@ public class Sql
     }
 
     /**
-     * This method allows to put the new dependence int the dataBase and also in the map.
+     * This method allows to put the new dependence in the dataBase and also in the map.
      * @param dep who is the dependence to add
      * @return true if the dependence is correctly add to table and false
      */
