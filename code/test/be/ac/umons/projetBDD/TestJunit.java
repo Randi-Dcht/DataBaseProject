@@ -4,9 +4,10 @@ import org.junit.*;
 import static org.junit.Assert.*;
 
 /**
-*This class allows the test for the project of DataBase with dependence.
-*@author Randy Dauchot & Guillaume Cardoen (étudiants en Sciences informatique Umons)
-*/
+ *This class allows the test for the project of DataBase with dependence.
+ *This test in write with the package Junit 4 and java 8.
+ *@author Randy Dauchot & Guillaume Cardoen (étudiants en Sciences informatique Umons)
+ */
 
 public class TestJunit
 {
@@ -23,27 +24,29 @@ public class TestJunit
   public void quit()
   {
     Saving.CLOSE();
+    sql.close();
   }
 
   @Test
   public void testSqlConnect()
   {
-    assertTrue("Connect to the exist dataBAse",sql.connect("test.db"));
+    assertTrue("Connect to the exist dataBAse",sql.connect("compileTest/testconnect.db"));
+    assertTrue("Close the dataBase", sql.close());
   }
 
   @Test
   public void testSqlCreate()
   {
     assertFalse("don't connect to dataBase",sql.createDatabase());
-    sql.connect("test.db");
+    sql.connect("compileTest/testcreateD.db");
     assertTrue("after connect, create dataBase", sql.createDatabase());
   }
 
   @Test
   public void createTable()
   {
-    sql.connect("test.db");
+    sql.connect("compileTest/testcreateT.db");
     sql.createDatabase();
-    assertTrue(sql.createTable("testJunit","lapin chasseur mort lol"));
+    assertTrue(sql.createTable("testJunit","Umons student matricule Java Python"));
   }
 }

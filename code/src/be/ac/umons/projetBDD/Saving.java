@@ -4,10 +4,20 @@ import java.io.*;
 import java.util.*;
 import java.text.*;
 
+/**
+ * This class allows to create a file with the history of this application
+ * The error is write to be recover after
+ * The action is save also to see after
+ * @author Randy Dauchot (etudiant en sciences Informatique Umons)
+ */
 public class Saving
 {
     private static PrintWriter ecrire;
 
+    /**
+     * This method allows to open or create a file for the save
+     * @param fichier who is the name of the file
+     */
     public static void REOPEN(String fichier)
     {
         try
@@ -21,6 +31,10 @@ public class Saving
         }
     }
 
+    /**
+     * This method allows ro write in the file and add the date of this write
+     * @param phrase who is the string who is writte in the file
+     */
     public static void WRITE(String phrase)
     {
         DateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm");
@@ -29,7 +43,9 @@ public class Saving
         ecrire.println(phrase);
     }
 
-
+    /**
+     * This methods allows to close the file of the saving.
+     */
     public static void CLOSE()
     {
         ecrire.println("Close the session of dataBase");
