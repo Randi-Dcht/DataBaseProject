@@ -3,7 +3,6 @@ package be.ac.umons.projetBDD.Commands;
 import be.ac.umons.projetBDD.Dependence;
 import be.ac.umons.projetBDD.Main;
 import be.ac.umons.projetBDD.Sql;
-
 import java.util.ArrayList;
 import java.util.List;
 
