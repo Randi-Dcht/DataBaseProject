@@ -38,12 +38,13 @@
 
 
 <!--This target allows to run the test with Junit4-->
-<target name="compilerTest" depends="build">
+<target name="test" depends="build">
+  <delete dir="compileTest"/>
   <mkdir dir="compileTest"/>
   <javac srcdir="code/src" destdir="compileTest" encoding="utf8" classpath=".:lib/sqlite-jdbc-3.27.2.1.jar"/>
   <javac srcdir="code/test" destdir="compileTest" encoding="utf8" classpath=".:lib/junit-4.12.jar"/>
 
-  <java classname="org.junit.runner.JUnitCore" classpath="compileTest:lib/junit-4.12.jar:lib/hamcrest-core-1.3.jar">
+  <java classname="org.junit.runner.JUnitCore" classpath=".:compileTest:lib/sqlite-jdbc-3.27.2.1.jar:lib/junit-4.12.jar:lib/hamcrest-core-1.3.jar">
     <arg value="be.ac.umons.projetBDD.TestJunit"/>
   </java>
 

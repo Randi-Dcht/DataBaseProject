@@ -28,7 +28,7 @@ public class Sql
         {
 //            Class.forName("org.sqlite.JDBC"); /*<= permet de dire le fichier jar*/
             connection = DriverManager.getConnection(url + fichier);
-            /*Supprimer =>*/ Saving.WRITE("Successfully connected with the database");
+            Saving.WRITE("Successfully connected with the database : " + fichier);
             return true;
         }
         catch(Exception e)
@@ -52,6 +52,7 @@ public class Sql
         catch(Exception e)
         {
             Saving.WRITE("Error while creating the database !!");
+            System.out.println(e);
             return false;
         }
     }
