@@ -44,7 +44,7 @@ public class ChooseMain
     public static void start()
     {
         if(user.equals("gui"))
-            new MainGui().start(new Stage());
+            MainGui.main(null);
         if(user.equals("cmd"))
             Main.main(null);
     }
