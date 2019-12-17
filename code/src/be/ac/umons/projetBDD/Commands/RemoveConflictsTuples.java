@@ -2,8 +2,7 @@ package be.ac.umons.projetBDD.Commands;
 
 import be.ac.umons.projetBDD.Main;
 import be.ac.umons.projetBDD.Sql;
-
-import java.awt.*;
+import java.awt.Point;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -11,6 +10,10 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * This class allows to remove the tuple in the dataBase
+ * @author Guillaume Cardoen (étudiant en sciences informatique Umons)
+ */
 public class RemoveConflictsTuples extends Command {
     public RemoveConflictsTuples(Sql db, String[] args) {
         super(db, args);
