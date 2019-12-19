@@ -53,7 +53,6 @@ public class IsKey extends CommandDF
 
     private ArrayList<String> found(ArrayList<String> array)
     {
-        Boolean var = true;
         ArrayList<Dependence> dpList = list;
         for(Dependence dp : list)
         {
@@ -67,7 +66,6 @@ public class IsKey extends CommandDF
         {
             array.addAll(dp.getLhs());array.add(dp.getRhs());
         }
-
         return array;
     }
 
