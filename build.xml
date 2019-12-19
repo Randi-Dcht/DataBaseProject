@@ -30,8 +30,7 @@
     <delete dir ="compile"/>
     <mkdir dir="compile"/>
     <javac srcdir="code/src" destdir="compile" encoding="utf8" classpath=".:compile:lib/sqlite-jdbc-3.27.2.1.jar"/>
-    <javac srcdir="code/GUI" destdir="compile" encoding="utf8" classpath=".:compile:lib/sqlite-jdbc-3.27.2.1.jar:lib/jfxrt.jar"/>
-    <java classname="be.ac.umons.projetBDD.GUI.MainGui" classpath=".:compile:lib/sqlite-jdbc-3.27.2.1.jar:lib/jfxrt.jar"/>
+    <java classname="be.ac.umons.projetBDD.GUI.MainGui" classpath=".:compile:lib/sqlite-jdbc-3.27.2.1.jar:lib/jfxrt.jar" output="/dev/null"/>
   </target>
 
 

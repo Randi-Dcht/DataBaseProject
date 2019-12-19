@@ -2,6 +2,7 @@ package be.ac.umons.projetBDD.GUI;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -20,6 +21,11 @@ public class MainGui extends Application
         Scene scene = new Scene(pane,1000,1000);
 
         pane.setCenter(createChoose());
+
+        Button bt = new Button("ok");
+        bt.setOnAction(e->{System.out.println("ok");});
+
+        pane.setBottom(bt);
 
         primaryStage.setScene(scene);
         primaryStage.setTitle("MainGui SGBD");

@@ -23,6 +23,11 @@ public class Is3NF extends CommandDF
     {
     }
 
+    private boolean data3nf()
+    {
+        return true;
+    }
+
 
     @Override
     public String getUsage()

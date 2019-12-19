@@ -12,6 +12,9 @@ import java.util.ArrayList;
 public class IsKey extends CommandDF
 {
     private ArrayList<Dependence> list;
+    private ArrayList<String> key;
+    private ArrayList<String> attribut;
+    private int maxAttribute = 0;
 
     public IsKey(Sql sql, String[] args)
     {
@@ -23,9 +26,58 @@ public class IsKey extends CommandDF
         return null;
     }
 
+    /**
+     * This method allows to see the key with an under algorithm of key
+     * @return string who is the key of the argument
+     */
     private String simpleKey()
     {
+        if(noRhsAttributes() == 0)
+            return hardKey();
+        ArrayList<String> total = new ArrayList<>();
+        total.addAll(attribut);
+        for(Dependence dp: list)
+        {
+            seeKey(dp,total);
+        }
         return null;
+    }
+
+    private String seeKey(Dependence dp,ArrayList<String> under)
+    {
+        under.addAll(dp.getLhs());
+        if(under.size() == maxAttribute)
+            return null;
+        return null;
+    }
+
+    private ArrayList<String> found(ArrayList<String> array)
+    {
+        Boolean var = true;
+        ArrayList<Dependence> dpList = list;
+        for(Dependence dp : list)
+        {
+            for(String str : dp.getLhs())
+            {
+                if(!array.contains(str))
+                    dpList.remove(dp);
+            }
+        }
+        for(Dependence dp : dpList)
+        {
+            array.addAll(dp.getLhs());array.add(dp.getRhs());
+        }
+
+        return array;
+    }
+
+    private int noRhsAttributes()
+    {
+        for(Dependence dp : list)
+        {
+            attribut.remove(dp.getRhs());
+        }
+        return attribut.size();
     }
 
     private String hardKey()
@@ -34,8 +86,13 @@ public class IsKey extends CommandDF
     }
 
     @Override
-    protected void doAction() {
-
+    protected void doAction()
+    {
+        key = new ArrayList<String>();
+        attribut=new ArrayList<>(); //TODO changer avec Sql
+        maxAttribute = attribut.size();
+        list = new ArrayList<>(); //TODO chaneger avec Sql
+        simpleKey();
     }
 
     @Override
