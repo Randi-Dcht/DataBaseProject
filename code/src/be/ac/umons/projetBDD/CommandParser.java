@@ -1,13 +1,6 @@
 package be.ac.umons.projetBDD;
 
-import be.ac.umons.projetBDD.Commands.AddDF;
-import be.ac.umons.projetBDD.Commands.CheckDF;
-import be.ac.umons.projetBDD.Commands.CheckDFAttr;
-import be.ac.umons.projetBDD.Commands.Command;
-import be.ac.umons.projetBDD.Commands.IsBCNF;
-import be.ac.umons.projetBDD.Commands.ListDF;
-import be.ac.umons.projetBDD.Commands.RemoveConflictsTuples;
-import be.ac.umons.projetBDD.Commands.RemoveRedundantDependencies;
+import be.ac.umons.projetBDD.Commands.*;
 
 public class CommandParser {
 
@@ -49,6 +42,10 @@ public class CommandParser {
             case "checkdfattr":
             case "cdfa":
                 command = new CheckDFAttr(db, commTab);
+                break;
+            case "proposedf":
+            case "pdf":
+                command = new ProposeDF(db, commTab);
                 break;
             default:
                 System.err.println(String.format("Command \"%s\" isn't defined !", commTab[0]));
