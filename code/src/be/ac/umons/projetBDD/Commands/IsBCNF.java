@@ -18,17 +18,15 @@ public class IsBCNF extends CommandDF {
         for (Dependence df : depList) {
             if (isTrivial(df))
                 continue;
-            List<String> lhs = new ArrayList<>(df.getLhs());
-            Set<String> determinedOne = new HashSet<>(lhs); // no duplicates
+            Set<String> determinedOne = new HashSet<>(df.getLhs()); // no duplicates
             List<Dependence> tempList = new LinkedList<>(depList); // copy the list
             boolean changed = true;
             while (changed && tempList.size() != 0) {
                 changed = false;
                 for (Iterator<Dependence> it = tempList.listIterator(); it.hasNext();) {
                     Dependence df2 = it.next();
-                    if (lhs.containsAll(df2.getLhs())) {
+                    if (determinedOne.containsAll(df2.getLhs())) {
                         determinedOne.add(df2.getRhs());
-                        lhs.add(df2.getRhs());
                         it.remove();
                         changed = true;
                     }
