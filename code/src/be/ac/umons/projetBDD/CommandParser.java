@@ -47,6 +47,9 @@ public class CommandParser {
             case "pdf":
                 command = new ProposeDF(db, commTab);
                 break;
+            case "listkey":
+                command = new ListKey(db, commTab);
+                break;
             default:
                 System.err.println(String.format("Command \"%s\" isn't defined !", commTab[0]));
                 return;
