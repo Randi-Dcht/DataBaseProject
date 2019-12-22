@@ -26,8 +26,9 @@ public class AddDF extends Command implements Confirmable {
      * This method allows to launch the action of this command
      */
     @Override
-    protected void doAction() {
+    protected String doAction() {
         addDF(args[1], args[2], args[3]);
+        return null;
     }
 
     /**

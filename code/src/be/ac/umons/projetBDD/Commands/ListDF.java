@@ -12,11 +12,13 @@ public class ListDF extends CommandDF {
     }
 
     @Override
-    protected void doAction() {
+    protected String doAction() {
         if (args.length > 1)
             listDF(args[1]);
         else
             listDF();
+
+        return null;
     }
 
     @Override

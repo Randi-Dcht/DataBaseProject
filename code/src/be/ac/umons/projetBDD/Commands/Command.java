@@ -27,12 +27,13 @@ public abstract class Command {
     /**
      * This method allows to launch the command (doAction()) if the number of Args are sufficient
      */
-    public void run() {
+    public String run() {
         if (checkArgsNumber())
-            doAction();
+            return doAction();
+        return null;
     }
 
-    protected abstract void doAction();
+    protected abstract String doAction();
 
     /**
      * This method allows to check the number of the arguments in the list.

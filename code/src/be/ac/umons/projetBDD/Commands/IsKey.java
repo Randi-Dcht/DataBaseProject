@@ -12,7 +12,6 @@ import java.util.ArrayList;
 public class IsKey extends CommandDF
 {
     private ArrayList<Dependence> list;
-    private ArrayList<String> key;
     private ArrayList<String> attribut;
     private int maxAttribute = 0;
 
@@ -30,25 +29,40 @@ public class IsKey extends CommandDF
      * This method allows to see the key with an under algorithm of key
      * @return string who is the key of the argument
      */
-    private String simpleKey()
+    private String simpleKey()//2
     {
-        if(noRhsAttributes() == 0)
-            return hardKey();
-        ArrayList<String> total = new ArrayList<>();
-        total.addAll(attribut);
+        ArrayList<String> total = new ArrayList<>(attribut);
+        ArrayList<Dependence> check = new ArrayList<>();
         for(Dependence dp: list)
         {
-            seeKey(dp,total);
+            for(String str : dp.getLhs())
+            {
+                if(total.contains(str))
+                    check.add(dp);
+            }
         }
+
         return null;
     }
 
-    private String seeKey(Dependence dp,ArrayList<String> under)
+    private boolean sizeMax(ArrayList<String> list, Dependence ... dp)
+    {
+        for(Dependence dpd : dp)
+        {
+            list.add(dpd.getRhs());
+            list.addAll(dpd.getLhs());
+        }
+        return list.size() == maxAttribute;
+    }
+
+    private ArrayList<String> seeKey(Dependence dp,ArrayList<String> under)
     {
         under.addAll(dp.getLhs());
+        under.add(dp.getRhs());
         if(under.size() == maxAttribute)
-            return null;
-        return null;
+            return under;
+        else
+            return found(under);
     }
 
     private ArrayList<String> found(ArrayList<String> array)
@@ -69,7 +83,7 @@ public class IsKey extends CommandDF
         return array;
     }
 
-    private int noRhsAttributes()
+    private int noRhsAttributes() //1
     {
         for(Dependence dp : list)
         {
@@ -84,17 +98,20 @@ public class IsKey extends CommandDF
     }
 
     @Override
-    protected void doAction()
+    protected String doAction() //0
     {
-        key = new ArrayList<String>();
         attribut=new ArrayList<>(); //TODO changer avec Sql
         maxAttribute = attribut.size();
         list = new ArrayList<>(); //TODO chaneger avec Sql
-        simpleKey();
+        if(noRhsAttributes() != 0)
+            return simpleKey();
+        return hardKey();
+
     }
 
     @Override
-    public String getUsage() {
-        return null;
+    public String getUsage()
+    {
+        return "<Attribute>";
     }
 }

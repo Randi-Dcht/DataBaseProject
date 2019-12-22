@@ -24,9 +24,10 @@ public abstract class CommandDF extends Command {
      * This method allows to launch the command (doAction)
      */
     @Override
-    public void run() {
+    public String run() {
         if (checkArgsNumber() && doesTableExistAndHaveDF())
-            doAction();
+            return doAction();
+        return null;
     }
 
     /**

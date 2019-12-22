@@ -28,6 +28,12 @@ public class CommandParser {
             case "isbcnf":
                 command = new IsBCNF(db, commTab);
                 break;
+            case "is3NF":
+                command = new Is3NF(db, commTab);
+                break;
+            case "isKey":
+                command = new IsKey(db, commTab);
+                break;
             case "checkdf":
                 command = new CheckDF(db, commTab);
                 break;

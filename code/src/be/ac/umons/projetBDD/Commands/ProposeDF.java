@@ -19,10 +19,10 @@ public class ProposeDF extends Command {
     }
 
     @Override
-    protected void doAction() {
+    protected String doAction() {
         if (! db.tableExists(args[1])) {
             System.err.println(String.format("ERROR : The table (%s) doesn't exist !", args[1]));
-            return;
+            return null;
         }
 
         List<String> dbAttr = db.getTableContentName(args[1]);
@@ -53,6 +53,7 @@ public class ProposeDF extends Command {
                 }
             }
         }
+        return null;
     }
 
     protected boolean isRepetitive(List<IntDependence> deps, List<Integer> is, int j) {

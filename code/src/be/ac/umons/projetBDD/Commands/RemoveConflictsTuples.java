@@ -21,10 +21,10 @@ public class RemoveConflictsTuples extends Command {
     }
 
     @Override
-    protected void doAction() {
+    protected String doAction() {
         if (Main.contradictionsTableName == null) {
             System.err.println("You have to use 'checkdf' before using this command !");
-            return;
+            return null;
         }
         ResultSet rs = db.executeQuery(String.format("SELECT * FROM %s", Main.contradictionsTableName));
         String[] columnNames;
@@ -34,7 +34,7 @@ public class RemoveConflictsTuples extends Command {
                 columnNames[i] = rs.getMetaData().getColumnLabel(i + 1);
         } catch (SQLException e) {
             e.printStackTrace();
-            return;
+            return null;
         }
         System.out.println("The following tuples were deleted :");
         List<Integer> toRemove = getListToRemove();
@@ -70,6 +70,8 @@ public class RemoveConflictsTuples extends Command {
 
         Main.contradictionsIDs = null;
         Main.contradictionsTableName = null;
+
+        return null;
     }
 
     private List<Integer> getListToRemove() {

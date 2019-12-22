@@ -45,7 +45,6 @@ public class CodeToGui
         df.remove(dd);
     }
 
-
     public boolean checkBCNF()
     {
         return true;
