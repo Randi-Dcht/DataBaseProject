@@ -10,7 +10,7 @@ import java.util.Set;
 /**
  * This class allows to interaction between the dataBase and the user through
  *    the command line in the terminal.
- * @author Guillaume Cardoen (étudiant en sciences informatique Umons)
+ * @author Randy Dauchot & Guillaume Cardoen (Student in computer science UMONS)
  */
 public class Main {
 

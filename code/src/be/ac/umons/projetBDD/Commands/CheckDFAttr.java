@@ -6,11 +6,19 @@ import be.ac.umons.projetBDD.Sql;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class allows to check if all attributes of the DF of a specific table are correct or not.
+ */
 public class CheckDFAttr extends CommandDF {
 
     List<String> names;
     private boolean errorInDF = false;
 
+    /**
+     * Construct a new instance of this class.
+     * @param db The database.
+     * @param args The arguments.
+     */
     public CheckDFAttr(Sql db, String[] args) {
         super(db, args);
         possibleNumberOfArgs.add(1);
@@ -32,6 +40,11 @@ public class CheckDFAttr extends CommandDF {
             System.out.println(String.format("All the DF all the table (%s) are correct !", args[1]));
     }
 
+    /**
+     * Check if the attributes of the given DF are correct or not.
+     * @param dep The DF.
+     * @return If the attributes of the given DF are correct or not.
+     */
     public boolean checkAttr(Dependence dep) {
         boolean res = true;
         for (String s : dep.getLhs()) {
@@ -51,6 +64,11 @@ public class CheckDFAttr extends CommandDF {
         return res;
     }
 
+    /**
+     * Ask if the given DF must be deleted or not.
+     * @param oneToDel The DF.
+     * @return If the given DF must be deleted or not.
+     */
     private boolean askForDeleting(Dependence oneToDel) {
         System.out.println(String.format("Do you want to delete %s -> %s from the table (%s) ? (y/N)", oneToDel.getLhs(), oneToDel.getRhs(), args[1]));
         String ans = Main.input.nextLine().trim().toLowerCase();

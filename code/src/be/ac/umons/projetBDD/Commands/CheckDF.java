@@ -10,10 +10,21 @@ import java.sql.SQLException;
 import java.util.*;
 import java.util.List;
 
+/**
+ * This class allows to check if the DF of a table are respected or not.
+ */
 public class CheckDF extends CommandDF {
 
+    /**
+     * Represent if a non-respected DF was found.
+     */
     private boolean errorInDF = false;
 
+    /**
+     * Construct a new instance of the class.
+     * @param db The database
+     * @param args The arguments.
+     */
     public CheckDF(Sql db, String[] args) {
         super(db, args);
         possibleNumberOfArgs.add(1);
@@ -31,6 +42,11 @@ public class CheckDF extends CommandDF {
             System.out.println(String.format("All the DF all the table (%s) are respected !", args[1]));
     }
 
+    /**
+     * Check if the given DF of the table given in arguments is respected or not.
+     * @param dep The DF.
+     * @return If the given DF of the table given in arguments is respected or not.
+     */
     public boolean checkDF(Dependence dep) {
         Main.contradictionsIDs = new HashSet<>();
         List<Point> idContradictionList = new ArrayList<>();

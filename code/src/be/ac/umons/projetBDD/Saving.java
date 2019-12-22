@@ -8,7 +8,7 @@ import java.text.*;
  * This class allows to create a file with the history of this application
  * The error is write to be recover after
  * The action is save also to see after
- * @author Randy Dauchot (etudiant en sciences Informatique Umons)
+ * @author Randy Dauchot (Student in computer science UMONS)
  */
 public class Saving
 {

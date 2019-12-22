@@ -5,8 +5,8 @@ import be.ac.umons.projetBDD.Dependence;
 import be.ac.umons.projetBDD.Main;
 
 /**
- * This class allows to put a dependence in the table of the dataBase with the restrictions
- * @author Guillaume Cardoen (étudiant en sciences informatique Umons)
+ * This class allows to add a dependence for a specific table in a specific database.
+ * @author Guillaume Cardoen (Student in computer science UMONS)
  */
 public class AddDF extends Command implements Confirmable {
 
@@ -23,24 +23,20 @@ public class AddDF extends Command implements Confirmable {
     }
 
     /**
-     * This method allows to launch the action of this command
+     * Add the dependence determined by the given arguments.
      */
     @Override
     protected void doAction() {
         addDF(args[1], args[2], args[3]);
     }
 
-    /**
-     * This method allows to return an action of this class
-     * @return action who is a string to explain the action
-     */
     @Override
     public String getUsage() {
         return "AddDF <tableName> <lhs> <rhs>";
     }
 
     /**
-     * This method allows to add a dependence in the table of the dataBase
+     * This method allows to add a dependence in the table of the database
      * @param tableName who is a name of the table in the dataBase
      * @param lhs who is a string of attribute separate by space
      * @param rhs who is an attribute who is define by lhs
