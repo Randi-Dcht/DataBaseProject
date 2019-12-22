@@ -1,9 +1,12 @@
 package be.ac.umons.projetBDD.GUI;
 
+import be.ac.umons.projetBDD.Saving;
+import be.ac.umons.projetBDD.Sql;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -39,9 +42,13 @@ public class NewDataBase extends Application
         center.setSpacing(5);
         addTable();
         title = new TextField(dat);
+
+        ScrollPane scp = new ScrollPane();
+        scp.setContent(center);
+
         pane.setTop(title);
         pane.setBottom(underPage());
-        pane.setCenter(center);
+        pane.setCenter(scp);
 
         stage.setTitle("Create a new DataBase");
         stage.setScene(scene);
@@ -125,9 +132,11 @@ public class NewDataBase extends Application
     public void finished()
     {
         if(list.size() != 0)
+        {
+            CodeToGui sql = new CodeToGui(title.getText());
+            sql.newData(list);
+            new SgbdGui(sql).start(new Stage());
             stage.close();
-        for(String str : list.keySet())
-            System.out.println(str + " -> " + list.get(str));
-
+        }
     }
 }

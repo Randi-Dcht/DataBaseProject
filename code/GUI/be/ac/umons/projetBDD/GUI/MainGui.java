@@ -29,10 +29,9 @@ public class MainGui extends Application
 
     /*Les variables de l'application*/
     private Stage stage;
-    private HBox top;
     private VBox entry;
     private BorderPane fondEcran;
-    private String roadNew ="misc/";
+    private String roadNew ="misc/Other/";
 
     @Override
     public void start(Stage primaryStage)
@@ -48,10 +47,9 @@ public class MainGui extends Application
 
         primaryStage.setTitle("Main of SGBD");
         primaryStage.setScene(scene);
-        //primaryStage.setOnCloseRequest(Event::consume);
         primaryStage.show();
-        stage = primaryStage;
 
+        stage = primaryStage;
     }
 
     public VBox choiseEntry()
@@ -71,14 +69,12 @@ public class MainGui extends Application
         hb2.setAlignment(Pos.CENTER);
 
         Button quit = new Button("quit Application");
-        Button param = new Button("help about this");
 
-        hb.setSpacing(30);
-        hb.getChildren().addAll(hb1,hb2,param,quit);
+        hb.setSpacing(50);
+        hb.getChildren().addAll(hb1,hb2,quit);
 
         oknew.setOnAction(e->{dnew(hb2,oknew);});
         okold.setOnAction(e->{dold(hb1,okold);});
-        param.setOnAction(e->{System.out.println("76 : paramètre de l'application");});
         quit.setOnAction(e->{stage.close();});
 
         return hb;
@@ -87,16 +83,14 @@ public class MainGui extends Application
     public void dold(HBox hb,Button bt)
     {
         ComboBox<String> oldBase = new ComboBox<String>(); oldBase.getStyleClass().add("text");
-        oldBase.getItems().addAll(find(roadNew.toString()));
+        oldBase.getItems().addAll(find(roadNew));
         oldBase.setPrefWidth(350);
         oldBase.setPrefHeight(30);
-        Button rp  = new Button("...");
         Button ok1 = new Button("ok");
-        hb.getChildren().addAll(oldBase,rp,ok1);
+        hb.getChildren().addAll(oldBase,ok1);
         hb.getChildren().remove(bt);
 
-        rp.setOnAction(e->{repertory();});
-        ok1.setOnAction(e->{changedOld(roadNew+oldBase.getValue());});
+        ok1.setOnAction(e->{changedOld(oldBase.getValue());});
     }
 
     public void dnew(HBox hb,Button bt)
@@ -105,18 +99,16 @@ public class MainGui extends Application
         texte.setText("NameOfDatabase");
         texte.setPrefWidth(350);
         texte.setPrefHeight(30);
-        Button rp  = new Button("...");
         Button ok2 = new Button("ok");
-        hb.getChildren().addAll(texte,rp,ok2);
+        hb.getChildren().addAll(texte,ok2);
         hb.getChildren().remove(bt);
 
-        rp.setOnAction(e->{repertory();});
-        ok2.setOnAction(e->{changedNew(roadNew+texte.getText());});
+        ok2.setOnAction(e->{changedNew(texte.getText());});
     }
 
     public void changedOld(String name)
     {
-
+        new SgbdGui(new CodeToGui(name)).start(new Stage());
         stage.close();
     }
 
@@ -135,21 +127,9 @@ public class MainGui extends Application
         for(String str : lst)
         {
             String[] cut = str.split("[/.]");
-            if(cut.length ==2 && cut[1].equals("sgbd"))
+            if(cut.length ==2 && cut[1].equals("db"))
                 lt.add(cut[0]);
         }
         return lt;
     }
-
-    public void repertory()
-    {
-        DirectoryChooser rep = new DirectoryChooser();
-        File file = rep.showDialog(stage);
-        System.out.println("151: " + file.toString());
-        if(file != null) {
-            roadNew = file.toString() + "/";
-            System.out.println("ok");
-        }
-    }
-
 }
