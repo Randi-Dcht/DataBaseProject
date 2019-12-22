@@ -6,6 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
+/**
+ *
+ */
 public class ProposeDF extends Command {
     /**
      * The constructor define a command
@@ -18,6 +21,9 @@ public class ProposeDF extends Command {
         possibleNumberOfArgs.add(1);
     }
 
+    /**
+     * Search and propose the possibles DF in a specific table.
+     */
     @Override
     protected String doAction() {
         if (! db.tableExists(args[1])) {
@@ -53,9 +59,18 @@ public class ProposeDF extends Command {
                 }
             }
         }
+        System.out.println(getAllPossiblesCombinations(1,3));
         return null;
+
     }
 
+    /**
+     * Check if a DF is repetitive with the previous dependencies given by <code>deps</code>.
+     * @param deps The previous dependencies.
+     * @param is The index of the attribute on the left of the DF.
+     * @param j The index of the attribute of the right of the DF.
+     * @return If a DF is repetitive.
+     */
     protected boolean isRepetitive(List<IntDependence> deps, List<Integer> is, int j) {
         for (IntDependence dep : deps)
             if (dep.rhs == j && is.containsAll(dep.lhs))
@@ -63,6 +78,13 @@ public class ProposeDF extends Command {
         return false;
     }
 
+    /**
+     * Return all possibles combinations starting at <code>from</code> and ending at <code>to</code>.
+     * For example, from = 1 and to = 2 will return [[], [1], [2], [1,2]]
+     * @param from The beginning.
+     * @param to The ending.
+     * @return All possibles combinations starting at <code>from</code> and ending at <code>to</code>.
+     */
     protected List<List<Integer>> getAllPossiblesCombinations(int from, int to) {
         List<List<Integer>> res = new ArrayList<>();
         List<Integer> list = new ArrayList<>();
@@ -74,6 +96,13 @@ public class ProposeDF extends Command {
         return res;
     }
 
+    /**
+     * Check if a DF is a dependence from a specific table.
+     * @param table The table.
+     * @param is The index of the attribute on the left of the DF.
+     * @param j The index of the attribute of the right of the DF.
+     * @return If a DF is a dependence from a specific table.
+     */
     protected boolean isADependence(List<String[]> table, List<Integer> is, int j) {
         Map<String, String> tmp = new HashMap<>();
         for (String[] row : table) {
@@ -88,11 +117,12 @@ public class ProposeDF extends Command {
     }
 
     /**
+     * Return all possibles combinations of <code>values</code> with the size <code>size</code>.
      * Code from https://stackoverflow.com/a/5162713 by superfav
-     * @param values
-     * @param size
+     * @param values The values to combine.
+     * @param size The size of the combination.
      * @param <T>
-     * @return
+     * @return All possibles combinations of <code>values</code> with the size <code>size</code>.
      */
     public static <T> List<List<T>> combination(List<T> values, int size) {
 

@@ -2,14 +2,28 @@ package be.ac.umons.projetBDD;
 
 import be.ac.umons.projetBDD.Commands.*;
 
+/**
+ * This class allows to parse a command.
+ */
 public class CommandParser {
 
+    /**
+     * The database.
+     */
     private Sql db;
 
+    /**
+     * Construct a new instance of the class.
+     * @param db The database.
+     */
     public CommandParser(Sql db) {
         this.db = db;
     }
 
+    /**
+     * Parse the command and execute the command <code>comm</code>.
+     * @param comm The command.
+     */
     public void executeCommand(String comm) {
         String[] commTab = comm.split(" ");
         Command command = null;
@@ -53,6 +67,9 @@ public class CommandParser {
             case "pdf":
                 command = new ProposeDF(db, commTab);
                 break;
+            case "listkey":
+                command = new ListKey(db, commTab);
+                break;
             default:
                 System.err.println(String.format("Command \"%s\" isn't defined !", commTab[0]));
                 return;
@@ -61,6 +78,9 @@ public class CommandParser {
             command.run();
     }
 
+    /**
+     * Execute the command when the confirmation was given.
+     */
     private void execAnyway() {
         if (Main.commandToConfirm != null) {
             Main.commandToConfirm.runAnyway();

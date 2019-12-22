@@ -33,6 +33,11 @@ public abstract class Command {
         return null;
     }
 
+
+    /**
+     * Do the action determined by the given arguments.
+     */
+
     protected abstract String doAction();
 
     /**
@@ -48,6 +53,9 @@ public abstract class Command {
         }
         return true;
     }
-
+    /**
+     * Return how the command should be used.
+     * @return How the command should be used.
+     */
     public abstract String getUsage();
 }

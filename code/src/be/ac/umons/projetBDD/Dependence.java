@@ -8,7 +8,7 @@ import java.util.List;
  * This class allows to define a dependence associate with a table.
  * Every dependence has a lhs who are attributes (list) define rhs.
  * Every dependence has a singular rhs who is a attributes define by lhs.
- * @author Randy Dauchot & Guillaume Cardoen (étudiants en sciences informatique Umons)
+ * @author Randy Dauchot & Guillaume Cardoen (Student in computer science UMONS)
  */
 public class Dependence
 {

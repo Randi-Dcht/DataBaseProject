@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * This class allows to remove a dependence in the dataBase
- * @author Guillaume Cardoen (étudiants en sciences informatique Umons)
+ * @author Guillaume Cardoen (Student in computer science UMONS)
  */
 public class RemoveRedundantDependencies extends CommandDF {
 

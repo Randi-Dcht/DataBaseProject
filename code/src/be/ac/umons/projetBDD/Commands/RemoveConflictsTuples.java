@@ -11,8 +11,8 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * This class allows to remove the tuple in the dataBase
- * @author Guillaume Cardoen (étudiant en sciences informatique Umons)
+ * This class allows to remove the tuple which is in contradiction with the dependencies of the table.
+ * @author Guillaume Cardoen (Student in computer science UMONS)
  */
 public class RemoveConflictsTuples extends Command {
     public RemoveConflictsTuples(Sql db, String[] args) {
@@ -74,6 +74,10 @@ public class RemoveConflictsTuples extends Command {
         return null;
     }
 
+    /**
+     * Return a list of all the indexes of the tuples to remove.
+     * @return A list of all the indexes of the tuples to remove.
+     */
     private List<Integer> getListToRemove() {
         List<Integer> toRemove = new ArrayList<>();
         if (args[1].equals("auto")) {

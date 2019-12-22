@@ -15,7 +15,7 @@ import java.util.Map;
 /**
  * This class allows the connect, read and write in the dataBase.
  * This class use the sqlLite dataBase.
- * @author : Randy Dauchot & Guillaume Cardoen (étudiants en sciences informatique Umons)
+ * @author : Randy Dauchot & Guillaume Cardoen (Student in computer science UMONS)
  */
 public class Sql
 {

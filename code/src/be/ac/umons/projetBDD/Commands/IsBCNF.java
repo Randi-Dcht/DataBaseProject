@@ -5,8 +5,17 @@ import be.ac.umons.projetBDD.Sql;
 
 import java.util.*;
 
+/**
+ * The class allows to check if a database is in BCNF.
+ * @author Cardoen Guillaume (Student in computer sciences UMONS)
+ */
 public class IsBCNF extends CommandDF {
 
+    /**
+     * Construct a new instance.
+     * @param db The database.
+     * @param args The arguments given with the command.
+     */
     public IsBCNF(Sql db, String[] args) {
         super(db, args);
         possibleNumberOfArgs.add(1);
@@ -18,17 +27,15 @@ public class IsBCNF extends CommandDF {
         for (Dependence df : depList) {
             if (isTrivial(df))
                 continue;
-            List<String> lhs = new ArrayList<>(df.getLhs());
-            Set<String> determinedOne = new HashSet<>(lhs); // no duplicates
+            Set<String> determinedOne = new HashSet<>(df.getLhs()); // no duplicates
             List<Dependence> tempList = new LinkedList<>(depList); // copy the list
             boolean changed = true;
             while (changed && tempList.size() != 0) {
                 changed = false;
                 for (Iterator<Dependence> it = tempList.listIterator(); it.hasNext();) {
                     Dependence df2 = it.next();
-                    if (lhs.containsAll(df2.getLhs())) {
+                    if (determinedOne.containsAll(df2.getLhs())) {
                         determinedOne.add(df2.getRhs());
-                        lhs.add(df2.getRhs());
                         it.remove();
                         changed = true;
                     }
@@ -44,6 +51,11 @@ public class IsBCNF extends CommandDF {
 
     }
 
+    /**
+     * Check if a DF is trivial or not.
+     * @param df The DF.
+     * @return If a DF is trivial or not.
+     */
     private boolean isTrivial(Dependence df) {
         return df.getLhs().contains(df.getRhs());
     }
