@@ -52,12 +52,11 @@ public class SgbdGui extends Application
     {
         listBP = new BorderPane[5];
         /*Dependence*/
-        DependanceGui DG = new DependanceGui(dataBase);
-        listBP[0] = DG.create();
+        listBP[0] = new DependanceGui(dataBase).create();
         /*option*/
-        listBP[1] = new BorderPane();
+        listBP[1] = new OptionGui(dataBase).create();
         /*DataBase*/
-        listBP[2] = new BorderPane();
+        listBP[2] = new DataGui(dataBase).create();
 
         actuel = listBP[0];
         return listBP[0];
