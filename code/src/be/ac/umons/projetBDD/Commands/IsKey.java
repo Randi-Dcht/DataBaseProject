@@ -98,14 +98,14 @@ public class IsKey extends CommandDF
     }
 
     @Override
-    protected String doAction() //0
+    protected void doAction() //0
     {
         attribut=new ArrayList<>(); //TODO changer avec Sql
         maxAttribute = attribut.size();
         list = new ArrayList<>(); //TODO chaneger avec Sql
         if(noRhsAttributes() != 0)
-            return simpleKey();
-        return hardKey();
+            simpleKey();
+        hardKey();
 
     }
 

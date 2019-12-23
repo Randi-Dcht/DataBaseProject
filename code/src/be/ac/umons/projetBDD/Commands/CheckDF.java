@@ -31,7 +31,7 @@ public class CheckDF extends CommandDF {
     }
 
     @Override
-    protected String doAction() {
+    protected void doAction() {
         List<Dependence> deps = db.getDependenciesMap().get(args[1]);
 
         for (Dependence dep : deps) {
@@ -40,8 +40,6 @@ public class CheckDF extends CommandDF {
 
         if (! errorInDF)
             System.out.println(String.format("All the DF all the table (%s) are respected !", args[1]));
-
-        return null;
     }
 
     /**
@@ -115,3 +113,4 @@ public class CheckDF extends CommandDF {
         }
     }
 }
+

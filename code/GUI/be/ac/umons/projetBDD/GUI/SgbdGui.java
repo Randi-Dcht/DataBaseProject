@@ -51,18 +51,13 @@ public class SgbdGui extends Application
     public BorderPane create()
     {
         listBP = new BorderPane[5];
-        /*Database*/
-        listBP[0] = new BorderPane();
-        /*Dependance*/
+        /*Dependence*/
         DependanceGui DG = new DependanceGui(dataBase);
-        listBP[1] = DG.create();
-        /*History*/
-        HistoryGui HG = new HistoryGui("misc/Other/"+dataBase.toString()+".saving");
-        listBP[2] = HG.create();
-        /*BCNF-3NF*/
-        listBP[3] = new BorderPane();
-        /*key*/
-        listBP[4] = new BorderPane();
+        listBP[0] = DG.create();
+        /*option*/
+        listBP[1] = new BorderPane();
+        /*DataBase*/
+        listBP[2] = new BorderPane();
 
         actuel = listBP[0];
         return listBP[0];
@@ -70,22 +65,18 @@ public class SgbdGui extends Application
 
     public HBox createTab()
     {
-        Button df   = new Button("Dependance");
-        Button base = new Button("History");
-        Button BCNF = new Button("BCNF-3NF");
-        Button key  = new Button("Key");
+        Button df   = new Button("Dependence");
+        Button opt = new Button("Option");
         Button data = new Button("DataBase");
 
         HBox hb = new HBox();
-        hb.getChildren().addAll(data,df,base,BCNF,key);
-        hb.setSpacing(25);
+        hb.getChildren().addAll(df,data,opt);
+        hb.setSpacing(45);
         hb.setAlignment(Pos.CENTER);
 
-        data.setOnAction(e->{changed(listBP[0]);});
-        base.setOnAction(e->{changed(listBP[2]);});
-        BCNF.setOnAction(e->{changed(listBP[3]);});
-        key.setOnAction(e->{changed(listBP[4]);});
-        df.setOnAction(e->{changed(listBP[1]);});
+        df.setOnAction(e->{changed(listBP[0]);});
+        data.setOnAction(e->{changed(listBP[2]);});
+        opt.setOnAction(e->{changed(listBP[1]);});
 
         return hb;
     }
@@ -121,24 +112,35 @@ public class SgbdGui extends Application
 
         safec.setOnAction(e->
         {
-            MainGui mg = new MainGui();
+            dataBase.quit();
             stage.close();
-            mg.start(new Stage());
+            new MainGui().start(new Stage());
+        });
+        safeq.setOnAction(e->
+        {
+            dataBase.quit();
+            stage.close();
         });
         clos2.setOnAction(e->
         {
+            dataBase.quit();
             stage.close();
         });
-        clos.setOnAction(e->{
-            MainGui mg = new MainGui();
+        clos.setOnAction(e->
+        {
+            dataBase.quit();
+            new MainGui().start(new Stage());
             stage.close();
-            mg.start(new Stage());
         });
         ref.setOnAction(e->
         {
-            SgbdGui neww = new SgbdGui(dataBase);
-            neww.start(new Stage());
+            dataBase.quit();
+            new SgbdGui(dataBase).start(new Stage());
             stage.close();
+        });
+        doc.setOnAction(e->
+        {
+
         });
 
         return vb;

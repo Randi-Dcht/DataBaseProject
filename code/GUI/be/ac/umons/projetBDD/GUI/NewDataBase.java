@@ -1,7 +1,5 @@
 package be.ac.umons.projetBDD.GUI;
 
-import be.ac.umons.projetBDD.Saving;
-import be.ac.umons.projetBDD.Sql;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;

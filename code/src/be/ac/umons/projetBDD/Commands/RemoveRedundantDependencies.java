@@ -29,7 +29,7 @@ public class RemoveRedundantDependencies extends CommandDF {
      * This method allows to launch the remove redundant dependence in the dataBase
      */
     @Override
-    protected String doAction() {
+    protected void doAction() {
         List<Dependence> dependenceList = db.getDependenciesMap().get(args[1]);
         List<Dependence> redundantDeps = new ArrayList<>();
         for (Dependence dependence : dependenceList) {
@@ -50,7 +50,6 @@ public class RemoveRedundantDependencies extends CommandDF {
                     db.removeDependence(dep);
             }
         }
-        return null;
     }
 
     /**

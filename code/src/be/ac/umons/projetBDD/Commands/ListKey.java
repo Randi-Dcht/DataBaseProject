@@ -21,7 +21,7 @@ public class ListKey extends CommandDF {
     }
 
     @Override
-    protected String doAction() {
+    protected void doAction() {
         List<List<Integer>> res = new ArrayList<>();
         List<String> dbAttr = db.getTableContentName(args[1]);
         int tableSize = dbAttr.size();
@@ -41,8 +41,6 @@ public class ListKey extends CommandDF {
                 System.out.println(String.format("%s is a key", Arrays.toString(lhs.toArray())));
             }
         }
-
-        return null;
     }
 
     /**

@@ -26,9 +26,8 @@ public class AddDF extends Command implements Confirmable {
      * Add the dependence determined by the given arguments.
      */
     @Override
-    protected String doAction() {
+    protected void doAction() {
         addDF(args[1], args[2], args[3]);
-        return null;
     }
 
     @Override

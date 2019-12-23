@@ -25,10 +25,10 @@ public class ProposeDF extends Command {
      * Search and propose the possibles DF in a specific table.
      */
     @Override
-    protected String doAction() {
+    protected void doAction() {
         if (! db.tableExists(args[1])) {
             System.err.println(String.format("ERROR : The table (%s) doesn't exist !", args[1]));
-            return null;
+            return;
         }
 
         List<String> dbAttr = db.getTableContentName(args[1]);
@@ -60,8 +60,6 @@ public class ProposeDF extends Command {
             }
         }
         System.out.println(getAllPossiblesCombinations(1,3));
-        return null;
-
     }
 
     /**

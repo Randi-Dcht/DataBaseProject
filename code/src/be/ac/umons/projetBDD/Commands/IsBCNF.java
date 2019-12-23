@@ -22,7 +22,7 @@ public class IsBCNF extends CommandDF {
     }
 
     @Override
-    protected String doAction() {
+    protected void doAction() {
         List<Dependence> depList = db.getDependenciesMap().get(args[1]);
         for (Dependence df : depList) {
             if (isTrivial(df))
@@ -43,11 +43,10 @@ public class IsBCNF extends CommandDF {
             }
             if (! determinedOne.containsAll(db.getTableContentName(args[1]))) {
                 System.out.println(String.format("The table (%s) isn't in BCNF...", args[1]));
-                return null;
+                return;
             }
         }
         System.out.println(String.format("The table (%s) is in BCNF !", args[1]));
-        return String.format("The table (%s) is in BCNF !", args[1]);
 
     }
 

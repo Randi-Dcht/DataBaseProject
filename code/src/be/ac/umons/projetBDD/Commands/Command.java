@@ -12,6 +12,7 @@ public abstract class Command {
     protected Sql db;
     protected String[] args;
     protected List<Integer> possibleNumberOfArgs;
+    protected String memory = " ";
 
     /**
      * The constructor allows to define a command
@@ -27,18 +28,24 @@ public abstract class Command {
     /**
      * This method allows to launch the command (doAction()) if the number of Args are sufficient
      */
-    public String run() {
+    public void run() {
         if (checkArgsNumber())
-            return doAction();
-        return null;
+            doAction();
     }
 
+    /**
+     * This method return the result of the command who call
+     * @return memory (String)
+     */
+    public String getMemory()
+    {
+        return memory;
+    }
 
     /**
      * Do the action determined by the given arguments.
      */
-
-    protected abstract String doAction();
+    protected abstract void doAction();
 
     /**
      * This method allows to check the number of the arguments in the list.

@@ -24,13 +24,11 @@ public class Is3NF extends CommandDF
     }
 
     @Override
-    protected String doAction()
+    protected void doAction()
     {
         attributes = new ArrayList<>(); //TODO raccorder a Sql
         key = new ArrayList<>(); // TODO raccorder isKey
         data3nfEasy();
-
-        return null;
     }
 
     private int firstAttribute()

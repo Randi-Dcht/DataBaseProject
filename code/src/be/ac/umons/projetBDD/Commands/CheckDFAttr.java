@@ -26,7 +26,7 @@ public class CheckDFAttr extends CommandDF {
     }
 
     @Override
-    protected String doAction() {
+    protected void doAction() {
         ArrayList<Dependence> deps = new ArrayList<>(db.getDependenciesMap().get(args[1]));
 
         for (Dependence dep : deps) {
@@ -38,8 +38,6 @@ public class CheckDFAttr extends CommandDF {
 
         if (! errorInDF)
             System.out.println(String.format("All the DF all the table (%s) are correct !", args[1]));
-
-        return null;
     }
 
     /**
