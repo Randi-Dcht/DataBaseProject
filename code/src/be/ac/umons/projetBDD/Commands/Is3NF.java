@@ -59,13 +59,8 @@ public class Is3NF extends CommandDF
     {
         if(firstAttribute() == 0)
         {
-            System.out.println("This DataBase is in 3NF because all attributes is first");
-            memory.add("This DataBase is in 3NF because all attributes is first");
-        }
-        else if(data3NF())
-        {
-            System.out.println("this dataBase is in 3NF");
-            memory.add("this dataBase is in 3NF");
+            System.out.println("This DataBase is in 3NF");
+            memory.add("This DataBase is in 3NF");
         }
         else
         {
@@ -74,12 +69,6 @@ public class Is3NF extends CommandDF
         }
 
     }
-
-    private boolean data3NF()
-    {
-        return false;
-    }
-
 
     @Override
     public String getUsage()

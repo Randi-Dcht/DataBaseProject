@@ -24,6 +24,7 @@ public class SgbdGui extends Application
     private Stage stage;
     private BorderPane pane;
     private BorderPane actuel;
+    private BorderPane depp;
 
     public SgbdGui(CodeToGui dataBase)
     {
@@ -37,6 +38,7 @@ public class SgbdGui extends Application
         pane = new BorderPane();
         Scene scene = new Scene(pane,widthX,heightY);
         scene.getStylesheets().add(getClass().getResource(css).toExternalForm());
+        depp = new DependanceGui(dataBase).create();
 
         pane.setCenter(create());
         pane.setTop(createMenu());
@@ -49,7 +51,7 @@ public class SgbdGui extends Application
 
     public BorderPane create()
     {
-        BorderPane b = new DependanceGui(dataBase).create();
+        BorderPane b = depp;
         actuel = b;
         return b;
     }
@@ -65,7 +67,7 @@ public class SgbdGui extends Application
         hb.setSpacing(45);
         hb.setAlignment(Pos.CENTER);
 
-        df.setOnAction(e->{changed(new DependanceGui(dataBase).create());});
+        df.setOnAction(e->{changed(depp);});
         data.setOnAction(e->{changed(new DataGui(dataBase).create());});
         opt.setOnAction(e->{changed(new OptionGui(dataBase).create());});
 

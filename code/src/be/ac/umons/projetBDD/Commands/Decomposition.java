@@ -36,6 +36,12 @@ public class Decomposition extends CommandDF
         }
         db.refreshDependenciesMap();
         list.addAll(db.getDependenciesMap().get(args[1]));
+        if(list.size()==0)
+        {
+            System.out.println("There isn't dependence of this base");
+            memory.add("There isn't dependence of this base");
+            return;
+        }
         for(Dependence dp : list)
         {
             String request = " ";

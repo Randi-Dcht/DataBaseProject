@@ -155,7 +155,7 @@ public class OptionGui
             {
                 deco.getChildren().remove(tdeco);
                 tdeco = new VBox();
-                for(String str : db.listKey(decoC.getValue()))
+                for(String str : db.decopo(decoC.getValue()))
                     tdeco.getChildren().add(new Text(str));
                 deco.getChildren().add(tdeco);
             }

@@ -1,6 +1,10 @@
 package be.ac.umons.projetBDD.GUI;
 
-import be.ac.umons.projetBDD.Commands.*;
+import be.ac.umons.projetBDD.Commands.Command;
+import be.ac.umons.projetBDD.Commands.Decomposition;
+import be.ac.umons.projetBDD.Commands.Is3NF;
+import be.ac.umons.projetBDD.Commands.IsBCNF;
+import be.ac.umons.projetBDD.Commands.ListKey;
 import be.ac.umons.projetBDD.Dependence;
 import be.ac.umons.projetBDD.Saving;
 import be.ac.umons.projetBDD.Sql;
@@ -77,10 +81,17 @@ public class CodeToGui
     }
 
 
-    public void add(Dependence dd)
+    public boolean add(String table, String lhs, String rhs)
     {
-        if(sql.addDependence(dd))
-            df.add(dd);
+        Dependence dep = new Dependence(table, lhs, rhs);
+        if (! sql.tableExists(table))
+        {
+            return false;
+        }
+        else
+        {
+            return sql.addDependence(dep);
+        }
     }
 
     public HashMap<String,ArrayList<String>> getAttribute()
@@ -127,7 +138,7 @@ public class CodeToGui
     {
         String[] lt = {"isbcnf",table};
         Command cmd = new IsBCNF(sql,lt);
-        cmd.run();
+        cmd.modeGui();
         return cmd.getMemory();
     }
 
@@ -135,7 +146,15 @@ public class CodeToGui
     {
         String[] lt = {"is3NF",table};
         Command cmd = new Is3NF(sql,lt);
-        cmd.run();
+        cmd.modeGui();
+        return cmd.getMemory();
+    }
+
+    public ArrayList<String> decopo(String table)
+    {
+        String[] lt = {"is3NF",table};
+        Command cmd = new Decomposition(sql,lt);
+        cmd.modeGui();
         return cmd.getMemory();
     }
 
@@ -143,7 +162,7 @@ public class CodeToGui
     {
         String[] lt = {"decomposition",table};
         Command cmd = new ListKey(sql,lt);
-        cmd.run();
+        cmd.modeGui();
         return cmd.getMemory();
     }
 

@@ -4,6 +4,7 @@ package be.ac.umons.projetBDD.GUI;
 import be.ac.umons.projetBDD.Dependence;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -24,6 +25,7 @@ public class DependanceGui
     private VBox vb;
     private VBox listVbox;
     private ArrayList<Dependence> list = new ArrayList<>();
+    private String data = null;
 
     public DependanceGui(CodeToGui db)
     {
@@ -36,9 +38,10 @@ public class DependanceGui
         HBox right = new HBox();
         right.setSpacing(120);
         right.setAlignment(Pos.CENTER);
-        Button his = new Button("History");
+        ComboBox<String> dep = new ComboBox<String>();
+        dep.getItems().addAll(db.getTable(false));
         add = new Button("+");
-        right.getChildren().addAll(add,his);
+        right.getChildren().addAll(add,dep);
         vb = readDepandance();
         vb.getStyleClass().add("background");
         ScrollPane scroll = new ScrollPane();
@@ -46,7 +49,15 @@ public class DependanceGui
         scroll.getStyleClass().add("background");
         dp.setCenter(scroll);
         dp.setBottom(right);
-        add.setOnAction(e->{createDF();});
+        add.setOnAction(e->
+        {
+            if(dep.getValue() != null)
+            {
+                data = dep.getValue();
+                createDF();
+            }
+
+        });
 
         return dp;
     }
@@ -129,7 +140,7 @@ public class DependanceGui
         Button delete = createButton("croix.png",value);
         delete.getStyleClass().add("transpRed");
         delete.setVisible(false);
-        Button modif  = createAccept("ecrire.png",txt1,txt2,delete);
+        Button modif  = createAccept("ecrire.png",txt1,txt2,delete,data);
         modif.getStyleClass().add("transpGreen");
         hb.getChildren().addAll(accoD,txt1,accoF,fle,accoD2,txt2,accoF2,modif,delete);
         hb.setAlignment(Pos.CENTER);
@@ -138,10 +149,21 @@ public class DependanceGui
         add.setVisible(false);
     }
 
-    public Button createAccept(String picture,TextField txt1, TextField txt2,Button btt)
+    public Button createAccept(String picture,TextField txt1, TextField txt2,Button btt,String who)
     {
         Button bt = new Button("",picture(picture,30,30));
-        bt.setOnAction(e->{Dependence data = new Dependence("db",txt1.getText(),txt2.getText());list.add(data);db.add(data);btt.setVisible(true);add.setVisible(true);});
+        bt.setOnAction(e->
+        {
+            System.out.println("dehors");
+            if(db.add(who,txt1.getText(),txt2.getText()))
+            {
+                Dependence data = new Dependence(who, txt1.getText(), txt2.getText());
+                list.add(data);
+                add.setVisible(true);
+                btt.setVisible(true);
+                System.out.println("dedans");
+            }
+            });
         return bt;
     }
 
