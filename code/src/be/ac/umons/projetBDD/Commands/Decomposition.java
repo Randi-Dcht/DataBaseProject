@@ -28,7 +28,7 @@ public class Decomposition extends CommandDF
     private void decomposit()
     {
         ArrayList<Dependence> list = new ArrayList<>();
-        if(db.tableExists(args[1]))
+        if(!db.tableExists(args[1]))
         {
             System.out.println("Error the table doesn't exist in the dataBase");
             memory.add("Error the table doesn't exist in the dataBase");

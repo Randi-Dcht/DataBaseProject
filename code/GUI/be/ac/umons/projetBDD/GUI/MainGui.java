@@ -70,11 +70,14 @@ public class MainGui extends Application
 
         Button quit = new Button("quit Application");
 
+        Button help = new Button("Documentary");
+
         hb.setSpacing(50);
-        hb.getChildren().addAll(hb1,hb2,quit);
+        hb.getChildren().addAll(hb1,hb2,help,quit);
 
         oknew.setOnAction(e->{dnew(hb2,oknew);});
         okold.setOnAction(e->{dold(hb1,okold);});
+        help.setOnAction(e->{new Docu().start(new Stage());});
         quit.setOnAction(e->{stage.close();});
 
         return hb;
