@@ -22,7 +22,6 @@ public class SgbdGui extends Application
     private CodeToGui dataBase;
 
     private Stage stage;
-    private BorderPane[] listBP;
     private BorderPane pane;
     private BorderPane actuel;
 
@@ -50,16 +49,9 @@ public class SgbdGui extends Application
 
     public BorderPane create()
     {
-        listBP = new BorderPane[3];
-        /*Dependence*/
-        listBP[0] = new DependanceGui(dataBase).create();
-        /*option*/
-        listBP[1] = new OptionGui(dataBase).create();
-        /*DataBase*/
-        listBP[2] = new DataGui(dataBase).create();
-
-        actuel = listBP[0];
-        return listBP[0];
+        BorderPane b = new DependanceGui(dataBase).create();
+        actuel = b;
+        return b;
     }
 
     public HBox createTab()
@@ -73,9 +65,9 @@ public class SgbdGui extends Application
         hb.setSpacing(45);
         hb.setAlignment(Pos.CENTER);
 
-        df.setOnAction(e->{changed(listBP[0]);});
-        data.setOnAction(e->{changed(listBP[2]);});
-        opt.setOnAction(e->{changed(listBP[1]);});
+        df.setOnAction(e->{changed(new DependanceGui(dataBase).create());});
+        data.setOnAction(e->{changed(new DataGui(dataBase).create());});
+        opt.setOnAction(e->{changed(new OptionGui(dataBase).create());});
 
         return hb;
     }
@@ -84,6 +76,7 @@ public class SgbdGui extends Application
     {
         pane.getChildren().remove(actuel);
         pane.setCenter(who);
+        actuel = who;
     }
 
     public VBox createMenu()

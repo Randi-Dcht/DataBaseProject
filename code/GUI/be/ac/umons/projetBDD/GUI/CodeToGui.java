@@ -4,6 +4,8 @@ import be.ac.umons.projetBDD.Commands.*;
 import be.ac.umons.projetBDD.Dependence;
 import be.ac.umons.projetBDD.Saving;
 import be.ac.umons.projetBDD.Sql;
+
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -45,9 +47,13 @@ public class CodeToGui
         }
     }
 
-    public void newData(HashMap<String,ArrayList<String>> list)
+    public void before()
     {
         sql.createDatabase();
+    }
+
+    public void newData(HashMap<String,ArrayList<String>> list)
+    {
         for(String table : list.keySet())
         {
             String data = "";
@@ -85,6 +91,37 @@ public class CodeToGui
             df.add(dd);
         Command cmd = new RemoveRedundantDependencies(sql,list);
         cmd = new RemoveConflictsTuples(sql,list);
+    }
+
+    public HashMap<String,ArrayList<String>> getAttribute()
+    {
+        HashMap<String,ArrayList<String>> list = new HashMap<>();
+        ArrayList<String> under;
+        for(String str : getTable())
+        {
+            under = new ArrayList<>();
+            for(String what : sql.getTableContentName(str))
+                under.add(what);
+            list.put(str,under);
+        }
+        return list;
+    }
+
+    public ArrayList<String> getTable()
+    {
+        ArrayList<String> table = new ArrayList<>();
+        ResultSet result = sql.executeQuery("SELECT name FROM sqlite_master where type = 'table' AND name NOT LIKE 'sqlite_%';");
+        try
+        {
+            while (result.next())
+                table.add(result.getString(1));
+        }
+        catch (Exception e)
+        {
+            System.err.println(e);
+        }
+
+        return table;
     }
 
     public void remove(Dependence dd)

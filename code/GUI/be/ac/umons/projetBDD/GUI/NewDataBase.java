@@ -132,6 +132,7 @@ public class NewDataBase extends Application
         if(list.size() != 0)
         {
             CodeToGui sql = new CodeToGui(title.getText());
+            sql.before();
             sql.newData(list);
             new SgbdGui(sql).start(new Stage());
             stage.close();
