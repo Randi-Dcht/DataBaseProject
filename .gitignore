@@ -1,3 +1,5 @@
 /.idea/
 compile/
 compileTest/
+misc/Other/*.db
+misc/Other/*.saving
