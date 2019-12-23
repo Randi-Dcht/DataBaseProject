@@ -21,10 +21,12 @@ public class OptionGui
     private VBox nf;
     private VBox key;
     private VBox center;
+    private VBox deco;
 
     private VBox tbcnf = new VBox();
     private VBox tnf   = new VBox();
     private VBox tkey  = new VBox();
+    private VBox tdeco = new VBox();
 
     public OptionGui(CodeToGui db)
     {
@@ -38,12 +40,14 @@ public class OptionGui
         nf= new VBox();
         key = new VBox();
         center = new VBox();
+        deco = new VBox();
 
         bcnf.getChildren().addAll(createOptBC(),tbcnf);
         nf.getChildren().addAll(createOptNF(),tnf);
         key.getChildren().addAll(createOptKE(),tkey);
+        deco.getChildren().addAll(createOptDeco(),tdeco);
 
-        center.getChildren().addAll(bcnf,nf,key);
+        center.getChildren().addAll(bcnf,nf,key,deco);
         center.setSpacing(55);
         ScrollPane scp = new ScrollPane();
         scp.setContent(center);
@@ -56,6 +60,7 @@ public class OptionGui
     {
         HBox hb = new HBox();
         Text title = new Text(" DataBase BCNF ? ");
+        title.getStyleClass().add("textMd");
         ComboBox<String> bcnfC = new ComboBox<String>();
         bcnfC.getItems().addAll(db.getTable(false));
         Button bt = new Button(" Verified ");
@@ -82,6 +87,7 @@ public class OptionGui
     {
         HBox hb = new HBox();
         Text title = new Text(" DataBase 3NF ? ");
+        title.getStyleClass().add("textMd");
         ComboBox<String> nfC = new ComboBox<String>();
         nfC.getItems().addAll(db.getTable(false));
         Button bt = new Button(" Verified ");
@@ -108,18 +114,51 @@ public class OptionGui
     {
         HBox hb = new HBox();
         Text title = new Text(" Key of this DataBase");
+        title.getStyleClass().add("textMd");
+        ComboBox<String> keyC = new ComboBox<String>();
+        keyC.getItems().addAll(db.getTable(false));
         Button bt = new Button( " See the keys ");
         hb.setAlignment(Pos.CENTER);
         hb.setSpacing(30);
-        hb.getChildren().addAll(title,bt);
+        hb.getChildren().addAll(title,keyC,bt);
 
         bt.setOnAction(e->
         {
-            key.getChildren().remove(tkey);
-            tkey = new VBox();
-            for(String str : db.listKey())
-                tkey.getChildren().add(new Text(str));
-            key.getChildren().add(tkey);
+            if(keyC.getValue() != null)
+            {
+                key.getChildren().remove(tkey);
+                tkey = new VBox();
+                for(String str : db.listKey(keyC.getValue()))
+                    tkey.getChildren().add(new Text(str));
+                key.getChildren().add(tkey);
+            }
+        });
+
+        return hb;
+    }
+
+    public HBox createOptDeco()
+    {
+        HBox hb = new HBox();
+        Text title = new Text(" Decomposition of DataBase");
+        title.getStyleClass().add("textMd");
+        ComboBox<String> decoC = new ComboBox<String>();
+        decoC.getItems().addAll(db.getTable(false));
+        Button bt = new Button( " See the decomposition ");
+        hb.setAlignment(Pos.CENTER);
+        hb.setSpacing(30);
+        hb.getChildren().addAll(title,decoC,bt);
+
+        bt.setOnAction(e->
+        {
+            if(decoC.getValue() != null)
+            {
+                deco.getChildren().remove(tdeco);
+                tdeco = new VBox();
+                for(String str : db.listKey(decoC.getValue()))
+                    tdeco.getChildren().add(new Text(str));
+                deco.getChildren().add(tdeco);
+            }
         });
 
         return hb;

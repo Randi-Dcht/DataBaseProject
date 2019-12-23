@@ -8,7 +8,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -57,10 +56,12 @@ public class DataGui
         for (String table : list.keySet())
         {
             Text tab = new Text("-------------  " + table + "  -------------");
+            tab.getStyleClass().add("textMd");
             center.getChildren().add(tab);
             for(String att : list.get(table))
             {
                 Text at = new Text("Attribute : " + att);
+                at.getStyleClass().add("textMd");
                 center.getChildren().add(at);
             }
         }
@@ -68,7 +69,7 @@ public class DataGui
 
     public HBox createBt()
     {
-        valide = new Button("Valide");
+        valide = new Button("Valid");
         valide.setVisible(false);
         table = new Button("Add table");
         table.setVisible(true);
@@ -79,6 +80,9 @@ public class DataGui
         {
             db.newData(list);
             list = new HashMap<>();
+            actuel = " ?? ";
+            valide.setVisible(false);
+            attribut.setVisible(false);
         });
         table.setOnAction(e->
         {
@@ -102,8 +106,11 @@ public class DataGui
     public void add()
     {
         Text bef = new Text(" ---------- ");
+        bef.getStyleClass().add("textMd");
         Text aft = new Text(" ---------- ");
+        aft.getStyleClass().add("textMd");
         TextField txt = new TextField(" ? ");
+        txt.getStyleClass().add("textMd");
         Button bt = new Button("ok");
         HBox hb = new HBox();
         hb.getChildren().addAll(bef,txt,bt,aft);
@@ -125,7 +132,9 @@ public class DataGui
     public void addAttri()
     {
         Text tx = new Text("Attribute : ");
+        tx.getStyleClass().add("textMd");
         TextField txt = new TextField(" ? ");
+        txt.getStyleClass().add("textMd");
         Button bt = new Button("OK");
         HBox hb = new HBox();
         hb.setSpacing(5);

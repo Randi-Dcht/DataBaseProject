@@ -30,13 +30,13 @@
 
 .background
 {
-    -fx-background-color: #151515;
-    -fx-fill: #F2F2F2;
+    -fx-background-color: white;
+    -fx-fill: #151515;
 }
 
 .textMd
 {
-    -fx-fill: #F2F2F2;
+    -fx-fill: #151515;
     -fx-font-size:22;
     -fx-min-width: 600px;
     -fx-background-color: transparent;

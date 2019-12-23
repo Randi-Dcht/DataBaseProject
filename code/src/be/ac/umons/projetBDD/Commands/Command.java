@@ -13,6 +13,7 @@ public abstract class Command {
     protected String[] args;
     protected List<Integer> possibleNumberOfArgs;
     protected ArrayList<String> memory;
+    protected boolean main = true;
 
     /**
      * The constructor allows to define a command
@@ -24,6 +25,12 @@ public abstract class Command {
         this.args = args;
         possibleNumberOfArgs = new ArrayList<>();
         memory = new ArrayList<>();
+    }
+
+    public void modeGui()
+    {
+        main = false;
+        run();
     }
 
     /**

@@ -70,6 +70,9 @@ public class CommandParser {
             case "listkey":
                 command = new ListKey(db, commTab);
                 break;
+            case "decomposition":
+                command = new Decomposition(db, commTab);
+                break;
             default:
                 System.err.println(String.format("Command \"%s\" isn't defined !", commTab[0]));
                 return;

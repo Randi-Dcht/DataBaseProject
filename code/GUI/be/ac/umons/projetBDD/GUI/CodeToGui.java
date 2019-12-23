@@ -20,7 +20,6 @@ public class CodeToGui
     /*The name of this dataBase*/
     private Sql sql;
     private String name;
-    private String[] list = {" "};
 
     public CodeToGui(String name)
     {
@@ -77,19 +76,11 @@ public class CodeToGui
         return df;
     }
 
-    public ArrayList<Dependence> getAutoDep()
-    {
-        proposal = new ArrayList<>();
-        Command cmd = new ProposeDF(sql,list);
-        return proposal;
-    }
 
     public void add(Dependence dd)
     {
         if(sql.addDependence(dd))
             df.add(dd);
-        Command cmd = new RemoveRedundantDependencies(sql,list);
-        cmd = new RemoveConflictsTuples(sql,list);
     }
 
     public HashMap<String,ArrayList<String>> getAttribute()
@@ -148,9 +139,10 @@ public class CodeToGui
         return cmd.getMemory();
     }
 
-    public ArrayList<String> listKey()
+    public ArrayList<String> listKey(String table)
     {
-        Command cmd = new ListKey(sql,list);
+        String[] lt = {"decomposition",table};
+        Command cmd = new ListKey(sql,lt);
         cmd.run();
         return cmd.getMemory();
     }
