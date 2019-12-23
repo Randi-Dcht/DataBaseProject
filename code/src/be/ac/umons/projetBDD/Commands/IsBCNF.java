@@ -43,10 +43,12 @@ public class IsBCNF extends CommandDF {
             }
             if (! determinedOne.containsAll(db.getTableContentName(args[1]))) {
                 System.out.println(String.format("The table (%s) isn't in BCNF...", args[1]));
+                memory.add(String.format("The table (%s) isn't in BCNF...", args[1]));
                 return;
             }
         }
         System.out.println(String.format("The table (%s) is in BCNF !", args[1]));
+        memory.add(String.format("The table (%s) is in BCNF !", args[1]));
 
     }
 

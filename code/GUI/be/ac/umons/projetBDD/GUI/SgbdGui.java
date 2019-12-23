@@ -50,7 +50,7 @@ public class SgbdGui extends Application
 
     public BorderPane create()
     {
-        listBP = new BorderPane[5];
+        listBP = new BorderPane[3];
         /*Dependence*/
         listBP[0] = new DependanceGui(dataBase).create();
         /*option*/
@@ -139,7 +139,7 @@ public class SgbdGui extends Application
         });
         doc.setOnAction(e->
         {
-
+            new Docu().start(new Stage());
         });
 
         return vb;

@@ -12,7 +12,7 @@ public abstract class Command {
     protected Sql db;
     protected String[] args;
     protected List<Integer> possibleNumberOfArgs;
-    protected String memory = " ";
+    protected ArrayList<String> memory;
 
     /**
      * The constructor allows to define a command
@@ -23,6 +23,7 @@ public abstract class Command {
         this.db = db;
         this.args = args;
         possibleNumberOfArgs = new ArrayList<>();
+        memory = new ArrayList<>();
     }
 
     /**
@@ -37,7 +38,7 @@ public abstract class Command {
      * This method return the result of the command who call
      * @return memory (String)
      */
-    public String getMemory()
+    public ArrayList<String> getMemory()
     {
         return memory;
     }

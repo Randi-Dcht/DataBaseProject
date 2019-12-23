@@ -93,22 +93,22 @@ public class CodeToGui
             df.remove(dd);
     }
 
-    public boolean checkBCNF()
+    public ArrayList<String> checkBCNF(String Table)
     {
         Command cmd = new IsBCNF(sql,list);
-        return true;
+        return cmd.getMemory();
     }
 
-    public boolean check3NF(String Table)
+    public ArrayList<String> check3NF(String Table)
     {
         Command cmd = new Is3NF(sql,list);
-        return true;
+        return cmd.getMemory();
     }
 
     public ArrayList<String> listKey()
     {
         Command cmd = new ListKey(sql,list);
-        return null;
+        return cmd.getMemory();
     }
 
     public String toString()
