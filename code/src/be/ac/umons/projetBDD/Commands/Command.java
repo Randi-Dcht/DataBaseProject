@@ -57,6 +57,7 @@ public abstract class Command {
             return true;
         if (! possibleNumberOfArgs.contains(args.length - 1)) {
             System.err.println(String.format("Command %s takes %s arguments.\nUsage : %s", args[0], possibleNumberOfArgs, getUsage()));
+            memory.add(String.format("Command %s takes %s arguments.\nUsage : %s", args[0], possibleNumberOfArgs, getUsage()));
             return false;
         }
         return true;

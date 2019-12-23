@@ -2,6 +2,7 @@ package be.ac.umons.projetBDD.GUI;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -55,18 +56,23 @@ public class OptionGui
     {
         HBox hb = new HBox();
         Text title = new Text(" DataBase BCNF ? ");
+        ComboBox<String> bcnfC = new ComboBox<String>();
+        bcnfC.getItems().addAll(db.getTable(false));
         Button bt = new Button(" Verified ");
         hb.setAlignment(Pos.CENTER);
         hb.setSpacing(30);
-        hb.getChildren().addAll(title,bt);
+        hb.getChildren().addAll(title,bcnfC,bt);
 
         bt.setOnAction(e->
         {
-            bcnf.getChildren().remove(tbcnf);
-            tbcnf = new VBox();
-            for(String str : db.checkBCNF(" "))
-                tbcnf.getChildren().add(new Text(str));
-            bcnf.getChildren().add(tbcnf);
+            if(bcnfC.getValue() != null)
+            {
+                bcnf.getChildren().remove(tbcnf);
+                tbcnf = new VBox();
+                for(String str : db.checkBCNF(bcnfC.getValue()))
+                    tbcnf.getChildren().add(new Text(str));
+                bcnf.getChildren().add(tbcnf);
+            }
         });
 
         return hb;
@@ -76,18 +82,23 @@ public class OptionGui
     {
         HBox hb = new HBox();
         Text title = new Text(" DataBase 3NF ? ");
+        ComboBox<String> nfC = new ComboBox<String>();
+        nfC.getItems().addAll(db.getTable(false));
         Button bt = new Button(" Verified ");
         hb.setAlignment(Pos.CENTER);
         hb.setSpacing(30);
-        hb.getChildren().addAll(title,bt);
+        hb.getChildren().addAll(title,nfC,bt);
 
         bt.setOnAction(e->
         {
-            nf.getChildren().remove(tnf);
-            tnf = new VBox();
-            for(String str : db.check3NF(" "))
-                tnf.getChildren().add(new Text(str));
-            nf.getChildren().add(tnf);
+            if(nfC.getValue() != null)
+            {
+                nf.getChildren().remove(tnf);
+                tnf = new VBox();
+                for(String str : db.check3NF(nfC.getValue()))
+                    tnf.getChildren().add(new Text(str));
+                nf.getChildren().add(tnf);
+            }
         });
 
         return hb;

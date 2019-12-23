@@ -39,6 +39,7 @@ public class ListKey extends CommandDF {
             if (! redundant && isKey(db.getDependenciesMap().get(args[1]), lhs)) {
                 res.add(is);
                 System.out.println(String.format("%s is a key", Arrays.toString(lhs.toArray())));
+                memory.add(String.format("%s is a key", Arrays.toString(lhs.toArray())));
             }
         }
     }

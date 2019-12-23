@@ -36,12 +36,14 @@ public abstract class CommandDF extends Command {
     protected boolean doesTableExistAndHaveDF() {
         if (! db.tableExists(args[1])) {
             System.err.println(String.format("ERROR : The table (%s) doesn't exist !", args[1]));
+            memory.add(String.format("ERROR : The table (%s) doesn't exist !", args[1]));
             return false;
 
         }
         List<Dependence> tmp = db.getDependenciesMap().get(args[1]);
         if (tmp == null) {
             System.out.println("This table has no DF !");
+            memory.add("This table has no DF !");
             return false;
         }
         return true;

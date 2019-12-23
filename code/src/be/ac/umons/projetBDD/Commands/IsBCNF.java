@@ -2,8 +2,11 @@ package be.ac.umons.projetBDD.Commands;
 
 import be.ac.umons.projetBDD.Dependence;
 import be.ac.umons.projetBDD.Sql;
-
-import java.util.*;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
 
 /**
  * The class allows to check if a database is in BCNF.

@@ -1,7 +1,6 @@
 package be.ac.umons.projetBDD.Commands;
 
 import be.ac.umons.projetBDD.Sql;
-
 import java.util.ArrayList;
 
 /**
@@ -21,14 +20,30 @@ public class Is3NF extends CommandDF
     public Is3NF(Sql db, String[] args)
     {
         super(db, args);
+        possibleNumberOfArgs.add(1);
     }
 
     @Override
     protected void doAction()
     {
-        attributes = new ArrayList<>(); //TODO raccorder a Sql
-        key = new ArrayList<>(); // TODO raccorder isKey
+        attributes = getAtt(args[1]);
+        key = getKey();
         data3nfEasy();
+    }
+
+    private ArrayList<String> getAtt(String who)
+    {
+        ArrayList<String> list = new ArrayList<>();
+        if(db.tableExists(who))
+            list.addAll(db.getTableContentName(who));
+        return list;
+    }
+
+    private ArrayList<String> getKey()
+    {
+        Command cmd = new IsKey(db,args);
+        cmd.doAction();
+        return cmd.getMemory();
     }
 
     private int firstAttribute()
@@ -42,12 +57,7 @@ public class Is3NF extends CommandDF
 
     private void data3nfEasy()
     {
-        if(/*ajouter ici bcnf*/ 0==1)
-        {
-            System.out.println("This DataBase is BNCF so it is also 3NF");
-            memory.add("This DataBase is BNCF so it is also 3NF");
-        }
-        else if(firstAttribute() == 0)
+        if(firstAttribute() == 0)
         {
             System.out.println("This DataBase is in 3NF because all attributes is first");
             memory.add("This DataBase is in 3NF because all attributes is first");

@@ -4,7 +4,6 @@ import be.ac.umons.projetBDD.Commands.*;
 import be.ac.umons.projetBDD.Dependence;
 import be.ac.umons.projetBDD.Saving;
 import be.ac.umons.projetBDD.Sql;
-
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -97,7 +96,7 @@ public class CodeToGui
     {
         HashMap<String,ArrayList<String>> list = new HashMap<>();
         ArrayList<String> under;
-        for(String str : getTable())
+        for(String str : getTable(true))
         {
             under = new ArrayList<>();
             for(String what : sql.getTableContentName(str))
@@ -107,14 +106,17 @@ public class CodeToGui
         return list;
     }
 
-    public ArrayList<String> getTable()
+    public ArrayList<String> getTable(boolean cd)
     {
         ArrayList<String> table = new ArrayList<>();
         ResultSet result = sql.executeQuery("SELECT name FROM sqlite_master where type = 'table' AND name NOT LIKE 'sqlite_%';");
         try
         {
             while (result.next())
-                table.add(result.getString(1));
+            {
+                if(result.getString(1).equals("FuncDep") == cd || !result.getString(1).equals("FuncDep"))
+                    table.add(result.getString(1));
+            }
         }
         catch (Exception e)
         {
@@ -130,21 +132,26 @@ public class CodeToGui
             df.remove(dd);
     }
 
-    public ArrayList<String> checkBCNF(String Table)
+    public ArrayList<String> checkBCNF(String table)
     {
-        Command cmd = new IsBCNF(sql,list);
+        String[] lt = {"isbcnf",table};
+        Command cmd = new IsBCNF(sql,lt);
+        cmd.run();
         return cmd.getMemory();
     }
 
-    public ArrayList<String> check3NF(String Table)
+    public ArrayList<String> check3NF(String table)
     {
-        Command cmd = new Is3NF(sql,list);
+        String[] lt = {"is3NF",table};
+        Command cmd = new Is3NF(sql,lt);
+        cmd.run();
         return cmd.getMemory();
     }
 
     public ArrayList<String> listKey()
     {
         Command cmd = new ListKey(sql,list);
+        cmd.run();
         return cmd.getMemory();
     }
 
